@@ -8,7 +8,7 @@ SECTION MBR vstart=0x7c00 ;设定mbr的起始地址
     mov fs,ax
     mov sp,0x7c00
 
-    mov ax,0xb800   ;现存在文本模式， 内存地址是0xb800
+    mov ax,0xb800   ;显存在文本模式， 内存地址是0xb800
     mov gs,ax
 
     mov ax,0x0600        ;AH: 功能号0x06, 上卷窗口, AL:上卷行数，0-表示全部
@@ -54,12 +54,12 @@ SECTION MBR vstart=0x7c00 ;设定mbr的起始地址
 
     mov eax, LOADER_START_SECTOR    ;起始扇区lba地址
     mov bx, LOADER_BASE_ADDR     ;写入的地址
-    mov cx, 1                       ;待读入的扇区
+    mov cx, 4                       ;待读入的扇区数
     call rd_disk_m_16               ;以下读取程序的起始部分(一个扇区)
     
     jmp LOADER_BASE_ADDR
 
-    ;读取硬盘n个扇区
+;读取硬盘n个扇区
 rd_disk_m_16:
                     ;eax=LBA扇区号
                     ;bx=将数据写入的内存地址
@@ -99,7 +99,7 @@ rd_disk_m_16:
 
     ;向0x1f7端口写入读命令，0x20
     mov dx,0x1f7
-    mov al,0x20       
+    mov al,0x20     ;0x20=0010 0000b    
     out dx,al       ;0x1f7: 0010 0000
 
     ;检测硬盘状态,检测status寄存器的BSY位------
@@ -107,7 +107,7 @@ rd_disk_m_16:
     ;同一端口，写时表示写入命令字，读时表示读入硬盘状态
     nop
     in al,dx
-    and al,0x08
+    and al,0x88
     cmp al,0x08
     jnz .not_ready
     ;-----
