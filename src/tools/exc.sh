@@ -1,17 +1,34 @@
 #!/bin/bash
 
-# nasm -I /home/yhy/workspace/cccc/bochs/src/include -o /home/yhy/workspace/cccc/bochs/bin2/mbr.bin /home/yhy/workspace/cccc/bochs/src/boot/mbr.S
-# dd if=/home/yhy/workspace/cccc/bochs/bin2/mbr.bin of=/home/yhy/workspace/cccc/bochs/images/hd60M.img bs=512 count=1 conv=notrunc
-# nasm -I /home/yhy/workspace/cccc/bochs/src/include -o /home/yhy/workspace/cccc/bochs/bin2/loader.bin /home/yhy/workspace/cccc/bochs/src/boot/loader.S
-# dd if=/home/yhy/workspace/cccc/bochs/bin2/loader.bin of=/home/yhy/workspace/cccc/bochs/images/hd60M.img bs=512 count=3 seek=2 conv=notrunc
+nasm -I /home/yhy/workspace/cccc/bochs/src/include -o /home/yhy/workspace/cccc/bochs/build/bin/mbr.bin /home/yhy/workspace/cccc/bochs/src/boot/mbr.S
+dd if=/home/yhy/workspace/cccc/bochs/build/bin/mbr.bin of=/home/yhy/workspace/cccc/bochs/images/hd60M.img bs=512 count=1 conv=notrunc
+nasm -I /home/yhy/workspace/cccc/bochs/src/include -o /home/yhy/workspace/cccc/bochs/build/bin/loader.bin /home/yhy/workspace/cccc/bochs/src/boot/loader.S
+dd if=/home/yhy/workspace/cccc/bochs/build/bin/loader.bin of=/home/yhy/workspace/cccc/bochs/images/hd60M.img bs=512 count=3 seek=2 conv=notrunc
 
-# gcc -m32 -c -o /home/yhy/workspace/cccc/bochs/bin2/main.o /home/yhy/workspace/cccc/bochs/src/kernel/main.c && ld -m elf_i386 /home/yhy/workspace/cccc/bochs/bin2/main.o -Ttext 0xc0001500 -e main -o /home/yhy/workspace/cccc/bochs/bin2/kernel.bin
-# dd if=/home/yhy/workspace/cccc/bochs/bin2/kernel.bin of=/home/yhy/workspace/cccc/bochs/images/hd60M.img bs=512 count=200 seek=9 conv=notrunc
+# 定义目录变量
+WORKSPACE=/home/yhy/workspace/cccc/bochs
+BUILD_OBJ=${WORKSPACE}/build/obj
+BUILD_BIN=${WORKSPACE}/build/bin
+SRC_DIR=${WORKSPACE}/src
+LIB_DIR=${SRC_DIR}/lib
 
-#编译打印字符:
-nasm -f elf -o /home/yhy/workspace/cccc/bochs/bin2/print.o /home/yhy/workspace/cccc/bochs/src/lib/kernel/print.S
-gcc -m32 -c -o /home/yhy/workspace/cccc/bochs/bin2/main.o /home/yhy/workspace/cccc/bochs/src/kernel/main.c -I /home/yhy/workspace/cccc/bochs/src/lib/kernel
-ld -m elf_i386 -Ttext 0xc0001500 -e main -o /home/yhy/workspace/cccc/bochs/bin2/kernel.bin /home/yhy/workspace/cccc/bochs/bin2/main.o /home/yhy/workspace/cccc/bochs/bin2/print.o 
+# -fno-builtin
+nasm -f elf -o ${BUILD_OBJ}/print.o ${LIB_DIR}/kernel/print.S
+nasm -f elf -o ${BUILD_OBJ}/kernel.o ${SRC_DIR}/kernel/kernel.S
+gcc -m32 -c -fno-builtin -o ${BUILD_OBJ}/timer.o ${SRC_DIR}/device/timer.c -I ${LIB_DIR}/kernel -I ${SRC_DIR}/device
+gcc -m32 -c -fno-builtin -o ${BUILD_OBJ}/main.o ${SRC_DIR}/kernel/main.c -I ${LIB_DIR}/kernel -I ${SRC_DIR}/kernel
+gcc -m32 -c -fno-builtin -o ${BUILD_OBJ}/interrupt.o ${SRC_DIR}/kernel/interrupt.c -I ${LIB_DIR}/kernel -I ${SRC_DIR}/kernel
+gcc -m32 -c -fno-builtin -o ${BUILD_OBJ}/init.o ${SRC_DIR}/kernel/init.c -I ${LIB_DIR}/kernel -I ${SRC_DIR}/kernel
+
+
+ld -m elf_i386 -Ttext 0xc0001500 -e main -o ${BUILD_BIN}/kernel.bin ${BUILD_OBJ}/main.o ${BUILD_OBJ}/print.o ${BUILD_OBJ}/interrupt.o ${BUILD_OBJ}/init.o ${BUILD_OBJ}/kernel.o ${BUILD_OBJ}/timer.o 
+# dd if=/home/yhy/workspace/cccc/bochs/build/bin/kernel.bin of=/home/yhy/workspace/cccc/bochs/images/hd60M.img bs=512 count=200 seek=9 conv=notrunc
+# nasm -f elf -o ${BUILD_OBJ}/print.o ${LIB_DIR}/kernel/print.S
+# gcc -m32 -c -fno-builtin -o ${BUILD_OBJ}/main.o ${SRC_DIR}/kernel/main.c -I ${LIB_DIR}/kernel/ -I ${SRC_DIR}/kernel
+
+# ld -m elf_i386 -Ttext 0xc0001500 -e main -o ${BUILD_BIN}/kernel.bin ${BUILD_OBJ}/main.o ${BUILD_OBJ}/print.o  
+dd if=/home/yhy/workspace/cccc/bochs/build/bin/kernel.bin of=/home/yhy/workspace/cccc/bochs/images/hd60M.img bs=512 count=200 seek=9 conv=notrunc
+
 
 
 /home/yhy/workspace/cccc/bochs/bin/bochs -f /home/yhy/workspace/cccc/bochs/src/bochsrc.disk
