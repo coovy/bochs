@@ -41,7 +41,7 @@ static void* vaddr_get(enum pool_flags pf, uint32_t pg_cnt) {
       if (bit_idx_start == -1) {
 	 return NULL;
       }
-      while(cnt < pg_cnt) {
+      while(cnt < pg_cnt) {   // 
 	 bitmap_set(&kernel_vaddr.vaddr_bitmap, bit_idx_start + cnt++, 1);
       }
       vaddr_start = kernel_vaddr.vaddr_start + bit_idx_start * PG_SIZE;
@@ -56,10 +56,16 @@ uint32_t* pte_ptr(uint32_t vaddr) {
    /* 先访问到页表自己 + \
     * 再用页目录项pde(页目录内页表的索引)做为pte的索引访问到页表 + \
     * 再用pte的索引做为页内偏移*/
-   uint32_t* pte = (uint32_t*)(0xffc00000 + \    // 0xffc00000是最后一个页目录项， baocun的正好是页目录自己的物理地址
-	 ((vaddr & 0xffc00000) >> 10) + \             // 页目录项偏移地址
-	 PTE_IDX(vaddr) * 4);                         // 页表内偏移地址
-   return pte;                                   // 指向真实需要页表的虚拟地址
+
+
+   // 0xffc00000是最后一个页目录项， 保存的正好是页目录自己的物理地址
+   // 页目录项偏移地址
+   // 页表内偏移地址
+   // 指向真实需要页表的虚拟地址
+   uint32_t* pte = (uint32_t*)(0xffc00000 + \    
+	 ((vaddr & 0xffc00000) >> 10) + \             
+	 PTE_IDX(vaddr) * 4);                         
+   return pte;                                   
 }
 
 /* 得到虚拟地址vaddr对应的pde的指针 */
@@ -122,7 +128,9 @@ static void page_table_add(void* _vaddr, void* _page_phyaddr) {
 
 /* 分配pg_cnt个页空间,成功则返回起始虚拟地址,失败时返回NULL */
 void* malloc_page(enum pool_flags pf, uint32_t pg_cnt) {
-   ASSERT(pg_cnt > 0 && pg_cnt < 3840);
+   ASSERT(pg_cnt > 0 && pg_cnt < 3840);   // 这里其实我不应该这么写, 因为bochs配置作者书是32MB，平均分给用户和内核各16MB,然后保守取的15MB。
+                                          // 但是我自己的配置是512MB，应该相应增大一下，但是无所谓啦，就这样吧
+
 /***********   malloc_page的原理是三个动作的合成:   ***********
       1通过vaddr_get在虚拟内存池中申请虚拟地址
       2通过palloc在物理内存池中申请物理页
