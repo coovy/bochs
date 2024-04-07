@@ -1,8 +1,10 @@
 #ifndef __LIB_KERNEL_LIST_H
 #define __LIB_KERNEL_LIST_H
 #include "global.h"
+
+/*其实PCB的地址是自然页的起始地址，所以也可以0xfffff000&(&(PCB.general_tag))获取*/
 #define offset(struct_type, member) (int)(&((struct_type*)0)->member)
-#define elem2entry(struct_type, struct_member_name, elem_ptr) \ 
+#define elem2entry(struct_type, struct_member_name, elem_ptr) \
             (struct_type*)((int)elem_ptr - offset(struct_type, struct_member_name))
 
 /*定义链表结点成员结构***********

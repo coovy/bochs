@@ -4,9 +4,9 @@
 /*初始化双向链表*/
 void list_init(struct list* list){
     list->head.prev = NULL;
-    list->head.next = NULL;
+    list->head.next = &list->tail;
     list->tail.next = NULL;
-    list->tail.prev = NULL;
+    list->tail.prev = &list->head;
 }
 void list_insert_before(struct list_elem *before, struct list_elem *elem){
     enum intr_status old_status = intr_disable();
@@ -47,9 +47,9 @@ struct list_elem* list_pop(struct list* plist){
 }
 
 /*查找obj_elem, 成功返回true，失败返回false*/
-bool elem_find(struct list* plist, struct lise_elem* obj_elem){
+bool elem_find(struct list* plist, struct list_elem* obj_elem){
     struct list_elem *elem = plist->head.next;
-    while(elem != plist->tail){
+    while(elem != &plist->tail){
         if(elem == obj_elem){
             return true;
         }
@@ -83,7 +83,7 @@ struct list_elem* list_traversal(struct list* plist, function func, int arg){
 uint32_t list_len(struct list* plist){
     struct list_elem *elem = plist->head.next;
     uint32_t length = 0;
-    while(elem != plist->tail){
+    while(elem != &plist->tail){
         length++;
         elem = elem->next;
     }

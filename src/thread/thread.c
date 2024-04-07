@@ -3,16 +3,18 @@
 #include "string.h"
 #include "global.h"
 #include "memory.h"
-#include "list.h"
+#include "debug.h"
+#include "print.h"
+#include "interrupt.h"
 
 #define PG_SIZE 4096
 
-struct task *main_thread;       // 主线程pcb
+struct task_struct *main_thread;       // 主线程pcb
 struct list thread_ready_list;  // 就绪队列
 struct list thread_all_list;    // 所有任务队列
-static struct list_elem *threa_tag; //用于保存队列中的线程结点,
+static struct list_elem *thread_tag; //用于保存队列中的线程结点,
                                     //  队列中的结点不是pcb，需要将tag转换为pcb，所以记录tag用
-extern void switch_to(struct task_struct *cur, struct task task_struct *next);
+extern void switch_to(struct task_struct *cur, struct task_struct *next);
 
 /*获取当前pcb指针(虚拟地址)*/
 struct task_struct* running_thread(){
@@ -70,7 +72,7 @@ struct task_struct* thread_start(char* name, int prio, thread_func function, voi
     thread_create(thread, function, func_arg);
 
     /*确保之前不在队列中*/
-    ASSERT(!elem_find(&thread_ready_list, &thread->general_tag))
+    ASSERT(!elem_find(&thread_ready_list, &thread->general_tag));
     /*加入就绪线程队列*/
     list_append(&thread_ready_list, &thread->general_tag);
 
@@ -79,7 +81,7 @@ struct task_struct* thread_start(char* name, int prio, thread_func function, voi
     list_append(&thread_all_list, &thread->all_list_tag);
 
     // 使之前初始化的0弹入到对应的寄存器
-    asm volatile ("movl %0, %%esp\n pop %%ebp\n pop %%ebx\n pop %%edi\n pop %%esi\n ret" : : "g" (thread->self_kstack) : "memory");
+    // asm volatile ("movl %0, %%esp\n pop %%ebp\n pop %%ebx\n pop %%edi\n pop %%esi\n ret" : : "g" (thread->self_kstack) : "memory");
     return thread;
 }
 
@@ -90,4 +92,39 @@ static void make_main_thread(void){
 
     ASSERT(!elem_find(&thread_all_list, &main_thread->all_list_tag));
     list_append(&thread_all_list, &main_thread->all_list_tag);
+}
+
+/*实现任务调度*/
+void schedule(){
+    ASSERT(intr_get_status() == INTR_OFF);
+
+    struct task_struct *cur = running_thread();
+    if(cur->status == TASK_RUNNING){
+
+        // 仅仅是时间片到了
+        ASSERT(!elem_find(&thread_ready_list, &cur->general_tag));
+        list_append(&thread_ready_list, &cur->general_tag);
+        cur->ticks = cur->priority;
+        cur->status = TASK_READY;
+    } else{
+        // 阻塞
+    }
+    ASSERT(!list_empty(&thread_ready_list));
+    thread_tag = NULL;  
+    thread_tag = list_pop(&thread_ready_list);
+    struct task_struct *next = elem2entry(struct task_struct,
+                                          general_tag, thread_tag);
+    next->status = TASK_RUNNING;
+    switch_to(cur, next);
+}
+
+/*初始化线程环境*/
+void thread_init(void){
+    put_str("thread_init start\n");
+    list_init(&thread_ready_list);
+    list_init(&thread_all_list);
+
+    // 将当前main函数创建为主线程
+    make_main_thread();
+    put_str("thread_init done\n");
 }
