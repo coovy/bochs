@@ -12,6 +12,7 @@ int main(void) {
    init_all();
    thread_start("K_thread_a", 31, k_thread_a, "argA ");
    thread_start("k_thread_b", 8, k_thread_b, "argB ");
+   intr_enable();
    while(1);
    return 0;
 }
