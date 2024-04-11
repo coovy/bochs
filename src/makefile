@@ -26,16 +26,17 @@ LDFLAGS = -m elf_i386 -Ttext $(ENTRY_POINT) -e main -Map $(BUILD_DIR)/kernel.map
 OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o \
       $(BUILD_DIR)/timer.o $(BUILD_DIR)/kernel.o $(BUILD_DIR)/print.o \
       $(BUILD_DIR)/debug.o $(BUILD_DIR)/memory.o $(BUILD_DIR)/bitmap.o \
-      $(BUILD_DIR)/string.o $(BUILD_DIR)/thread.o $(BUILD_DIR)/switch.o $(BUILD_DIR)/list.o
+      $(BUILD_DIR)/string.o $(BUILD_DIR)/thread.o $(BUILD_DIR)/switch.o \
+	  $(BUILD_DIR)/list.o $(BUILD_DIR)/sync.o $(BUILD_DIR)/console.o $(BUILD_DIR)/keyboard.o $(BUILD_DIR)/ioqueue.o
 # OBJS = $(BUILD_DIR)/*.o
 
 ##############     c代码编译     ###############
 $(BUILD_DIR)/main.o: ${SRC_DIR}/kernel/main.c ${SRC_DIR}/lib/kernel/print.h \
-        ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/kernel/init.h ${SRC_DIR}/thread/thread.h
+        ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/kernel/init.h ${SRC_DIR}/thread/thread.h  ${SRC_DIR}/device/console.h ${SRC_DIR}/device/ioqueue.h ${SRC_DIR}/device/keyboard.h
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/init.o: ${SRC_DIR}/kernel/init.c ${SRC_DIR}/kernel/init.h ${SRC_DIR}/lib/kernel/print.h \
-        ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/kernel/interrupt.h ${SRC_DIR}/device/timer.h
+        ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/kernel/interrupt.h ${SRC_DIR}/device/timer.h ${SRC_DIR}/device/console.h ${SRC_DIR}/device/keyboard.h
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/interrupt.o: ${SRC_DIR}/kernel/interrupt.c ${SRC_DIR}/kernel/interrupt.h \
@@ -73,6 +74,24 @@ $(BUILD_DIR)/list.o: ${SRC_DIR}/lib/kernel/list.c ${SRC_DIR}/lib/kernel/list.h $
    	${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/kernel/print.h \
 	${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/kernel/interrupt.h ${SRC_DIR}/lib/string.h ${SRC_DIR}/lib/stdint.h
 	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/sync.o: ${SRC_DIR}/thread/sync.c ${SRC_DIR}/thread/sync.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/lib/kernel/bitmap.h \
+   	${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/kernel/print.h \
+	${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/kernel/interrupt.h ${SRC_DIR}/lib/string.h ${SRC_DIR}/lib/stdint.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/console.o: ${SRC_DIR}/device/console.c ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/stdint.h\
+        ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/keyboard.o: ${SRC_DIR}/device/keyboard.c ${SRC_DIR}/device/keyboard.h ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/stdint.h\
+        ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h ${SRC_DIR}/device/ioqueue.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/ioqueue.o: ${SRC_DIR}/device/ioqueue.c ${SRC_DIR}/device/ioqueue.h ${SRC_DIR}/device/keyboard.h ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/stdint.h\
+        ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h
+	$(CC) $(CFLAGS) $< -o $@
+
 
 ##############    汇编代码编译    ###############
 $(BUILD_DIR)/kernel.o: ${SRC_DIR}/kernel/kernel.S

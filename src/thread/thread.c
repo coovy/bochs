@@ -6,9 +6,14 @@
 #include "debug.h"
 #include "print.h"
 #include "interrupt.h"
+#include "sync.h"
 
 #define PG_SIZE 4096
 
+
+
+struct task_struct* idle_thread;    // idle线程
+struct lock pid_lock;		    // 分配pid锁
 struct task_struct *main_thread;       // 主线程pcb
 struct list thread_ready_list;  // 就绪队列
 struct list thread_all_list;    // 所有任务队列
@@ -127,4 +132,31 @@ void thread_init(void){
     // 将当前main函数创建为主线程
     make_main_thread();
     put_str("thread_init done\n");
+}
+
+/*阻塞线程*/
+void thread_block(enum task_status stat){
+    ASSERT(((stat == TASK_BLOCKED) || (stat == TASK_WAITING) || (stat == TASK_HANGING)));
+    /*返回原来状态并关闭中断*/
+    enum intr_status old_status = intr_disable();
+    struct task_struct *cur_thread = running_thread();
+    cur_thread->status = stat;          // 置其状态为stat
+    schedule();                         // 将当前线程换下处理器
+    /*待当前线程被解除阻塞后才能继续运行下面得intr_set_status*/
+    intr_set_status(old_status);
+}
+
+/*将线程pthread解除阻塞*/
+void thread_unblock(struct task_struct* pthread){
+    enum intr_status old_status = intr_disable();
+    ASSERT(((pthread->status == TASK_BLOCKED) || (pthread->status == TASK_WAITING) || (pthread->status == TASK_HANGING)));
+    if(pthread->status == TASK_READY){
+        ASSERT(!elem_find(&thread_ready_list, &pthread->general_tag));
+        if(elem_find(&thread_ready_list, &pthread->general_tag)){
+            PANIC("thread_unblock: blocked thread in ready_list\n");
+        }
+        list_push(&thread_ready_list, &pthread->general_tag);
+        pthread->status = TASK_READY;
+    }
+    intr_set_status(old_status);
 }

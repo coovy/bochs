@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "interrupt.h": "c",
-        "print.h": "c"
+        "print.h": "c",
+        "keyboard.h": "c"
     }
 }

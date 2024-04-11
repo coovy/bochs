@@ -4,6 +4,9 @@
 #include "timer.h"		  // 用相对路径演示头文件包含
 #include "memory.h"
 #include "thread.h"
+#include "console.h"
+#include "keyboard.h"
+
 
 /*负责初始化所有模块 */
 void init_all() {
@@ -12,4 +15,6 @@ void init_all() {
    timer_init();
    mem_init();
    thread_init(); // 初始化线程相关结构
+   console_init();
+   keyboard_init();
 }
