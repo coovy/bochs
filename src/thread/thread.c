@@ -7,9 +7,7 @@
 #include "print.h"
 #include "interrupt.h"
 #include "sync.h"
-
-#define PG_SIZE 4096
-
+#include "process.h"
 
 
 struct task_struct* idle_thread;    // idle线程
@@ -120,6 +118,8 @@ void schedule(){
     struct task_struct *next = elem2entry(struct task_struct,
                                           general_tag, thread_tag);
     next->status = TASK_RUNNING;
+    /*激活任务页*/
+    process_activate(next);
     switch_to(cur, next);
 }
 

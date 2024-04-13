@@ -6,7 +6,7 @@
 #include "thread.h"
 #include "console.h"
 #include "keyboard.h"
-
+#include "tss.h"
 
 /*负责初始化所有模块 */
 void init_all() {
@@ -17,4 +17,5 @@ void init_all() {
    thread_init(); // 初始化线程相关结构
    console_init();
    keyboard_init();
+   tss_init();
 }

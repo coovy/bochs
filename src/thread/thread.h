@@ -3,7 +3,11 @@
 
 #include "stdint.h"
 #include "list.h"
+#include "memory.h"
 
+
+extern struct list thread_ready_list;
+extern struct list thread_all_list;
 /*自定义通用函数类型，它将在很多线程函数中作为形参类型*/
 typedef void thread_func(void*);     // 定义函数类型thread_func, 接收void，返回void
 
@@ -33,7 +37,7 @@ struct intr_stack{
     //虽热pushah把esp也压入栈, 但是esp是不断变化的，所以会被popad忽略
     uint32_t ebx;
     uint32_t edx;
-    uint32_t edc;
+    uint32_t ecx;
     uint32_t eax;
     uint32_t gs;
     uint32_t fs;
@@ -83,7 +87,9 @@ struct task_struct {
    uint32_t elapsed_ticks;   //此任务再cpu运行后至今占用了多少cpu嘀嗒数
    struct list_elem general_tag;  //用于线程在一般的队列中的结点
    struct list_elem all_list_tag;   // 用于线程队列thread_all_list中的结点
-   uint32_t *pgdir;                 // 进程自己页表的虚拟地址
+   uint32_t *pgdir;                 // 进程自己页表的虚拟地址，用于存放页目录表的虚拟地址
+
+   struct virtual_addr userprog_vaddr; // 用户进程的虚拟地址池
 };
 
 void thread_create(struct task_struct* pthread, thread_func function, void* func_arg);
