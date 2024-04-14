@@ -9,11 +9,12 @@
 #define PIC_S_CTRL 0xa0	       // 从片的控制端口是0xa0
 #define PIC_S_DATA 0xa1	       // 从片的数据端口是0xa1
 
-#define IDT_DESC_CNT 0x30      // 目前总共支持的中断数
+#define IDT_DESC_CNT 0x81      // 目前总共支持的中断数
 
 #define EFLAGS_IF   0x00000200       // eflags寄存器中的if位为1
 #define GET_EFLAGS(EFLAG_VAR) asm volatile("pushfl\n popl %0" : "=g" (EFLAG_VAR))
 
+extern uint32_t syscall_handler(void);
 /*中断门描述符结构体*/
 struct gate_desc {
    uint16_t    func_offset_low_word;
@@ -72,11 +73,14 @@ static void make_idt_desc(struct gate_desc* p_gdesc, uint8_t attr, intr_handler 
 
 /*初始化中断描述符表*/
 static void idt_desc_init(void) {
-   int i;
+   int i, lastindex = IDT_DESC_CNT - 1;    // 作者这个使用最后一个是因为写系统调用的时候IDT_DESC_CNT就设置了0x81
    for (i = 0; i < IDT_DESC_CNT; i++) {
       make_idt_desc(&idt[i], IDT_DESC_ATTR_DPL0, intr_entry_table[i]); 
    }
-   put_str("   idt_desc_init done\n");
+
+   /*处理系统调用, 系统调用中断门dpl为3, 中断处理程序有单独的syscall_handler*/
+   make_idt_desc(&idt[lastindex], IDT_DESC_ATTR_DPL3, syscall_handler);
+   put_str("idt_desc_init done\n");
 }
 
 /* 通用的中断处理函数,一般用在异常出现时的处理 
@@ -186,8 +190,7 @@ void idt_init() {
    idt_desc_init();	   // 初始化中断描述符表
    exception_init();	   // 异常名初始化并注册通常的中断处理函数
    pic_init();		   // 初始化8259A
-
-   /* 加载idt */
+   /* 加载中断描述符表idt */
    uint64_t idt_operand = ((sizeof(idt) - 1) | ((uint64_t)(uint32_t)idt << 16));
    asm volatile("lidt %0" : : "m" (idt_operand));     // idt寄存器
    put_str("idt_init done\n");

@@ -18,7 +18,7 @@ intr%1entry:		 ; 每个中断处理程序都要压入中断向量号,所以一�
    push es
    push fs
    push gs
-   pushad			 ; PUSHAD指令压入32位寄存器,其入栈顺序是: EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI
+   pushad			 ; PUSHAD指令压入通用寄存器,其入栈顺序是: EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI
 
    ; 如果是从片上进入的中断,除了往从片上发送EOI外,还要往主片上发送EOI 
    mov al,0x20                   ; 中断结束命令EOI
@@ -95,3 +95,31 @@ VECTOR 0x2d,ZERO	;fpu浮点单元异常
 VECTOR 0x2e,ZERO	;硬盘
 VECTOR 0x2f,ZERO	;保留
 
+
+;0x80号中断
+[bits 32]
+extern syscall_table
+section .text
+global syscall_handler
+
+syscall_handler:
+   push 0       ;若在相关的异常中cpu没有压入错误码,为了统一栈中格式,就手工压入一个0
+   push ds
+   push es
+   push fs
+   push gs
+   pushad		; PUSHAD指令压入通用寄存器,其入栈顺序是: EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI
+
+   push 0x80    ; 也是仅为了保持栈一致
+
+   ; 传入参数，c调用约定是最右边参数先入栈，然后栈顶是返回地址
+   push edx    ; 第3个参数
+   push ecx    ; 第2个参数
+   push ebx    ; 第1个参数
+
+   ; 调用子功能处理函数
+   call [syscall_table + eax*4]   ; 编译器会在栈中根据C函数声明匹配正确数量的参数
+   add esp, 12
+
+   mov [esp + 8*4], eax       ;将call调用后的返回值存入待当前内核栈中eax的位置，abi约定的返回值在eax,无返回则eax值不变
+   jmp intr_exit  

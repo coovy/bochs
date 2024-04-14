@@ -23,7 +23,7 @@ void list_insert_before(struct list_elem *before, struct list_elem *elem){
 
 /*添加元素到列表队首，类似栈push操作*/
 void list_push(struct list* plist, struct list_elem* elem){
-    list_insert_before(plist->head.prev, elem);
+    list_insert_before(plist->head.next, elem);
 }
 
 void list_append(struct list* plist, struct list_elem* elem){

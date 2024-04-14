@@ -4,7 +4,6 @@
 
 typedef void* intr_handler;
 void idt_init(void);
-extern struct ioqueue kbd_buf;
 
 /* 定义中断的两种状态:
  * INTR_OFF值为0,表示关中断,

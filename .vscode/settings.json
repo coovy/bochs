@@ -3,6 +3,9 @@
     "files.associations": {
         "interrupt.h": "c",
         "print.h": "c",
-        "keyboard.h": "c"
+        "keyboard.h": "c",
+        "process.h": "c",
+        "syscall-init.h": "c",
+        "*.cbak": "c"
     }
 }

@@ -9,6 +9,16 @@
 #include "sync.h"
 #include "process.h"
 
+struct lock pid_lock;
+
+/*分配pid*/
+static pid_t allocate_pid(void){
+    static pid_t next_pid = 0;      // 静态变量
+    lock_acquire(&pid_lock);
+    next_pid++;
+    lock_release(&pid_lock);
+    return next_pid;
+}
 
 struct task_struct* idle_thread;    // idle线程
 struct lock pid_lock;		    // 分配pid锁
@@ -50,6 +60,7 @@ void thread_create(struct task_struct* pthread, thread_func function, void* func
 /*初始化线程基本信息*/
 void init_thread(struct task_struct* pthread, char* name, int prio){
     memset(pthread, 0, sizeof(*pthread));
+    pthread->pid = allocate_pid();
     strcpy(pthread->name, name);
 
     if(pthread == main_thread){
@@ -123,17 +134,6 @@ void schedule(){
     switch_to(cur, next);
 }
 
-/*初始化线程环境*/
-void thread_init(void){
-    put_str("thread_init start\n");
-    list_init(&thread_ready_list);
-    list_init(&thread_all_list);
-
-    // 将当前main函数创建为主线程
-    make_main_thread();
-    put_str("thread_init done\n");
-}
-
 /*阻塞线程*/
 void thread_block(enum task_status stat){
     ASSERT(((stat == TASK_BLOCKED) || (stat == TASK_WAITING) || (stat == TASK_HANGING)));
@@ -160,3 +160,16 @@ void thread_unblock(struct task_struct* pthread){
     }
     intr_set_status(old_status);
 }
+
+/*初始化线程环境*/
+void thread_init(void){
+    put_str("thread_init start\n");
+    list_init(&thread_ready_list);
+    list_init(&thread_all_list);
+    lock_init(&pid_lock);
+    // 将当前main函数创建为主线程
+    make_main_thread();
+    put_str("thread_init done\n");
+}
+
+
