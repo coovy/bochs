@@ -5,9 +5,6 @@
 #include "syscall.h"
 #include "print.h"
 
-#define va_start(ap, v) ap = (va_list)&v // 把ap指向第一个固定参数v
-#define va_arg(ap, t) *((t *)(ap += 4))    // ap指向下一个参数并返回其值, 32位栈存储单位是4字节
-#define va_end(ap) ap = NULL               // 清除ap
 
 /* 将整型转换成字符(integer to ascii) */
 /* 带转换的整数, 保存转换结果的缓冲区指针的地址，转换基数*/

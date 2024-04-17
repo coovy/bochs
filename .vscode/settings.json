@@ -6,6 +6,8 @@
         "keyboard.h": "c",
         "process.h": "c",
         "syscall-init.h": "c",
-        "*.cbak": "c"
+        "*.cbak": "c",
+        "random": "c",
+        "thread.h": "c"
     }
 }

@@ -27,7 +27,10 @@ OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o \
       $(BUILD_DIR)/timer.o $(BUILD_DIR)/kernel.o $(BUILD_DIR)/print.o \
       $(BUILD_DIR)/debug.o $(BUILD_DIR)/memory.o $(BUILD_DIR)/bitmap.o \
       $(BUILD_DIR)/string.o $(BUILD_DIR)/thread.o $(BUILD_DIR)/switch.o \
-	  $(BUILD_DIR)/list.o $(BUILD_DIR)/sync.o $(BUILD_DIR)/console.o $(BUILD_DIR)/keyboard.o $(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/tss.o $(BUILD_DIR)/process.o $(BUILD_DIR)/syscall.o $(BUILD_DIR)/syscall-init.o $(BUILD_DIR)/stdio.o 
+	  $(BUILD_DIR)/list.o $(BUILD_DIR)/sync.o $(BUILD_DIR)/console.o  \
+	  $(BUILD_DIR)/keyboard.o $(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/tss.o \
+	  $(BUILD_DIR)/process.o $(BUILD_DIR)/syscall.o $(BUILD_DIR)/syscall-init.o \
+	  $(BUILD_DIR)/stdio.o $(BUILD_DIR)/stdio-kernel.o $(BUILD_DIR)/ide.o
 # OBJS = $(BUILD_DIR)/*.o
 
 HEADERS = ${SRC_DIR}
@@ -110,8 +113,16 @@ $(BUILD_DIR)/syscall.o: ${LIB_DIR}/user/syscall.c ${LIB_DIR}/user/syscall.h ${SR
         ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h
 	$(CC) $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/stdio.o: ${SRC_DIR}/lib/stdio.c ${SRC_DIR}/lib/stdio.h ${LIB_DIR}/user/syscall.h ${SRC_DIR}/lib/stdint.h\
+$(BUILD_DIR)/stdio.o: ${SRC_DIR}/lib/stdio.c ${SRC_DIR}/lib/stdio.h ${LIB_DIR}/user/syscall.h ${SRC_DIR}/lib/stdint.h \
         ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/interrupt.h ${SRC_DIR}/lib/string.h ${LIB_DIR}/user/syscall.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/stdio-kernel.o: ${SRC_DIR}/kernel/stdio-kernel.c ${SRC_DIR}/kernel/stdio-kernel.h ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/lib/stdio.h ${SRC_DIR}/device/console.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/ide.o: ${SRC_DIR}/device/ide.c ${SRC_DIR}/device/ide.h ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/kernel/debug.h \
+		${SRC_DIR}/lib/string.h ${SRC_DIR}/device/timer.h ${SRC_DIR}/kernel/interrupt.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/kernel/list.h	\
+   		${SRC_DIR}/lib/stdio.h ${SRC_DIR}/kernel/stdio-kernel.h ${SRC_DIR}/thread/sync.h
 	$(CC) $(CFLAGS) $< -o $@
 
 ##############    汇编代码编译    ###############

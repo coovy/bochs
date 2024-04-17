@@ -2,6 +2,7 @@
 #define __KERNEL_GLOBAL_H
 #include "stdint.h"
 
+#define UNUSED __attribute__ ((unused))
 #define PG_SIZE 4096
 
 // GDT描述符属性
