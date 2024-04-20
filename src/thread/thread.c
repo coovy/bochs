@@ -86,7 +86,19 @@ void init_thread(struct task_struct* pthread, char* name, int prio){
     pthread->elapsed_ticks = 0;
     pthread->pgdir = NULL;
     pthread->self_kstack = (uint32_t *)((uint32_t)pthread + PG_SIZE); // 线程自己在0特权级的栈，初始化在栈顶
-    pthread->stack_magic = 0x19870916;  // 自定义的魔数, 没有什么道理可言
+    
+    /* 预留标准输入输出 */
+    pthread->fd_table[0] = 0;
+    pthread->fd_table[1] = 1;
+    pthread->fd_table[2] = 2;
+    /* 其余的全置为-1 */
+    uint8_t fd_idx = 3;
+    while (fd_idx < MAX_FILES_OPEN_PER_PROC){
+        pthread->fd_table[fd_idx] = -1;
+        fd_idx++;
+    }
+    
+    pthread->stack_magic = 0x19870916; // 自定义的魔数, 没有什么道理可言
 }
 
 /*创建一优先级为prio的线程，线程名为name, 线程所执行的函数是function(func_arg)*/

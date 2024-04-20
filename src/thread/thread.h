@@ -5,7 +5,7 @@
 #include "list.h"
 #include "memory.h"
 
-
+#define MAX_FILES_OPEN_PER_PROC 8
 extern struct list thread_ready_list;
 extern struct list thread_all_list;
 
@@ -78,22 +78,28 @@ struct thread_stack{
    void* func_arg;    // 由Kernel_thread所调用的函数所需的参数
 };
 
-/* 进程或线程的pcb,程序控制块 */
-struct task_struct {
-   uint32_t* self_kstack;	 // 栈顶指针，各内核线程都用自己的内核栈
-   pid_t pid;
-   enum task_status status;
-   uint8_t priority;		 // 线程优先级
-   char name[16];
-   uint32_t stack_magic;	 // 用这串数字做栈的边界标记,用于检测栈的溢出
-   uint32_t ticks;
 
-   uint32_t elapsed_ticks;   //此任务再cpu运行后至今占用了多少cpu嘀嗒数
-   struct list_elem general_tag;  //用于线程在一般的队列中的结点
-   struct list_elem all_list_tag;   // 用于线程队列thread_all_list中的结点
-   uint32_t *pgdir;                 // 进程自己页表的虚拟地址，用于存放页目录表的虚拟地址
-   struct mem_block_desc u_block_desc[DESC_CNT];
-   struct virtual_addr userprog_vaddr; // 用户进程的虚拟地址池
+/* 进程或线程的pcb,程序控制块 */
+struct task_struct
+{
+    uint32_t *self_kstack; // 栈顶指针，各内核线程都用自己的内核栈
+    pid_t pid;
+    enum task_status status;
+    uint8_t priority; // 线程优先级
+    char name[16];
+    uint32_t stack_magic; // 用这串数字做栈的边界标记,用于检测栈的溢出
+    uint32_t ticks;
+
+    uint32_t elapsed_ticks;        // 此任务再cpu运行后至今占用了多少cpu嘀嗒数
+    
+    int32_t fd_table[MAX_FILES_OPEN_PER_PROC];  // 文件描述符数组
+    /* general_tag的作用是用于线程在一般的队列中的结点 */
+    
+    struct list_elem general_tag;  // 用于线程在一般的队列中的结点
+    struct list_elem all_list_tag; // 用于线程队列thread_all_list中的结点
+    uint32_t *pgdir;               // 进程自己页表的虚拟地址，用于存放页目录表的虚拟地址
+    struct mem_block_desc u_block_desc[DESC_CNT];
+    struct virtual_addr userprog_vaddr; // 用户进程的虚拟地址池
 };
 
 void thread_create(struct task_struct* pthread, thread_func function, void* func_arg);

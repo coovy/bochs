@@ -30,7 +30,8 @@ OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o \
 	  $(BUILD_DIR)/list.o $(BUILD_DIR)/sync.o $(BUILD_DIR)/console.o  \
 	  $(BUILD_DIR)/keyboard.o $(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/tss.o \
 	  $(BUILD_DIR)/process.o $(BUILD_DIR)/syscall.o $(BUILD_DIR)/syscall-init.o \
-	  $(BUILD_DIR)/stdio.o $(BUILD_DIR)/stdio-kernel.o $(BUILD_DIR)/ide.o $(BUILD_DIR)/fs.o
+	  $(BUILD_DIR)/stdio.o $(BUILD_DIR)/stdio-kernel.o $(BUILD_DIR)/ide.o $(BUILD_DIR)/fs.o \
+	  $(BUILD_DIR)/file.o $(BUILD_DIR)/inode.o $(BUILD_DIR)/dir.o
 # OBJS = $(BUILD_DIR)/*.o
 
 HEADERS = ${SRC_DIR}
@@ -126,6 +127,21 @@ $(BUILD_DIR)/ide.o: ${SRC_DIR}/device/ide.c ${SRC_DIR}/device/ide.h ${SRC_DIR}/d
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/fs.o: ${SRC_DIR}/fs/fs.c ${SRC_DIR}/fs/fs.h ${SRC_DIR}/fs/inode.h ${SRC_DIR}/fs/super_block.h ${SRC_DIR}/fs/dir.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/stdint.h \
+		${SRC_DIR}/lib/string.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/kernel/list.h	${SRC_DIR}/kernel/global.h \
+   		${SRC_DIR}/lib/stdio.h ${SRC_DIR}/kernel/stdio-kernel.h ${SRC_DIR}/device/ide.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/file.o: ${SRC_DIR}/fs/file.c ${SRC_DIR}/fs/file.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/fs/inode.h ${SRC_DIR}/fs/super_block.h ${SRC_DIR}/fs/dir.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/stdint.h \
+		${SRC_DIR}/lib/string.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/kernel/list.h	${SRC_DIR}/kernel/global.h \
+   		${SRC_DIR}/lib/stdio.h ${SRC_DIR}/kernel/stdio-kernel.h ${SRC_DIR}/device/ide.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/dir.o: ${SRC_DIR}/fs/dir.c ${SRC_DIR}/fs/dir.h ${SRC_DIR}/fs/file.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/fs/inode.h ${SRC_DIR}/fs/super_block.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/stdint.h \
+		${SRC_DIR}/lib/string.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/kernel/list.h	${SRC_DIR}/kernel/global.h \
+   		${SRC_DIR}/lib/stdio.h ${SRC_DIR}/kernel/stdio-kernel.h ${SRC_DIR}/device/ide.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/inode.o: ${SRC_DIR}/fs/inode.c ${SRC_DIR}/fs/file.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/fs/inode.h ${SRC_DIR}/fs/super_block.h ${SRC_DIR}/fs/dir.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/stdint.h \
 		${SRC_DIR}/lib/string.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/kernel/list.h	${SRC_DIR}/kernel/global.h \
    		${SRC_DIR}/lib/stdio.h ${SRC_DIR}/kernel/stdio-kernel.h ${SRC_DIR}/device/ide.h
 	$(CC) $(CFLAGS) $< -o $@
