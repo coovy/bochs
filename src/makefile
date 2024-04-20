@@ -106,7 +106,7 @@ $(BUILD_DIR)/tss.o: ${SRC_DIR}/userprog/tss.c ${SRC_DIR}/userprog/tss.h ${SRC_DI
         ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h
 	$(CC) $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/syscall-init.o: ${SRC_DIR}/userprog/syscall-init.c ${SRC_DIR}/userprog/syscall-init.h ${SRC_DIR}/userprog/tss.h ${SRC_DIR}/userprog/process.h ${SRC_DIR}/device/keyboard.h ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/stdint.h\
+$(BUILD_DIR)/syscall-init.o: ${SRC_DIR}/userprog/syscall-init.c ${SRC_DIR}/userprog/syscall-init.h ${SRC_DIR}/userprog/tss.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/userprog/process.h ${SRC_DIR}/device/keyboard.h ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/stdint.h\
         ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h
 	$(CC) $(CFLAGS) $< -o $@
 
