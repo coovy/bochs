@@ -97,7 +97,8 @@ void init_thread(struct task_struct* pthread, char* name, int prio){
         pthread->fd_table[fd_idx] = -1;
         fd_idx++;
     }
-    
+
+    pthread->cwd_inode_nr = 0;
     pthread->stack_magic = 0x19870916; // 自定义的魔数, 没有什么道理可言
 }
 

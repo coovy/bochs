@@ -87,7 +87,6 @@ struct task_struct
     enum task_status status;
     uint8_t priority; // 线程优先级
     char name[16];
-    uint32_t stack_magic; // 用这串数字做栈的边界标记,用于检测栈的溢出
     uint32_t ticks;
 
     uint32_t elapsed_ticks;        // 此任务再cpu运行后至今占用了多少cpu嘀嗒数
@@ -100,6 +99,9 @@ struct task_struct
     uint32_t *pgdir;               // 进程自己页表的虚拟地址，用于存放页目录表的虚拟地址
     struct mem_block_desc u_block_desc[DESC_CNT];
     struct virtual_addr userprog_vaddr; // 用户进程的虚拟地址池
+
+    uint32_t cwd_inode_nr;  // 进程所在的工作目录的inode编号
+    uint32_t stack_magic; // 用这串数字做栈的边界标记, 用于检测栈的溢出
 };
 
 void thread_create(struct task_struct* pthread, thread_func function, void* func_arg);
