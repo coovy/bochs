@@ -31,13 +31,13 @@ OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o \
 	  $(BUILD_DIR)/keyboard.o $(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/tss.o \
 	  $(BUILD_DIR)/process.o $(BUILD_DIR)/syscall.o $(BUILD_DIR)/syscall-init.o \
 	  $(BUILD_DIR)/stdio.o $(BUILD_DIR)/stdio-kernel.o $(BUILD_DIR)/ide.o $(BUILD_DIR)/fs.o \
-	  $(BUILD_DIR)/file.o $(BUILD_DIR)/inode.o $(BUILD_DIR)/dir.o
+	  $(BUILD_DIR)/file.o $(BUILD_DIR)/inode.o $(BUILD_DIR)/dir.o $(BUILD_DIR)/fork.o
 # OBJS = $(BUILD_DIR)/*.o
 
 HEADERS = ${SRC_DIR}
 
 ##############     c代码编译     ###############
-$(BUILD_DIR)/main.o: ${SRC_DIR}/kernel/main.c ${SRC_DIR}/userprog/process.h ${SRC_DIR}/userprog/tss.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/fs/fs.h \
+$(BUILD_DIR)/main.o: ${SRC_DIR}/kernel/main.c ${SRC_DIR}/userprog/process.h ${SRC_DIR}/userprog/tss.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/userprog/fork.h \
         ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/kernel/init.h ${SRC_DIR}/thread/thread.h  ${SRC_DIR}/device/console.h ${SRC_DIR}/device/ioqueue.h ${SRC_DIR}/device/keyboard.h ${LIB_DIR}/user/syscall.h ${SRC_DIR}/userprog/syscall-init.h ${SRC_DIR}/lib/stdio.h
 	$(CC) $(CFLAGS) $< -o $@
 
@@ -71,7 +71,7 @@ $(BUILD_DIR)/memory.o: ${SRC_DIR}/kernel/memory.c ${SRC_DIR}/kernel/memory.h ${S
 	${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/kernel/interrupt.h ${SRC_DIR}/lib/string.h ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/lib/kernel/list.h
 	$(CC) $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/thread.o: ${SRC_DIR}/thread/thread.c ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/lib/kernel/bitmap.h \
+$(BUILD_DIR)/thread.o: ${SRC_DIR}/thread/thread.c ${SRC_DIR}/thread/thread.h ${SRC_DIR}/userprog/fork.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/lib/kernel/bitmap.h \
    	${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/kernel/print.h \
 	${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/kernel/interrupt.h ${SRC_DIR}/lib/string.h ${SRC_DIR}/lib/stdint.h
 	$(CC) $(CFLAGS) $< -o $@
@@ -106,8 +106,8 @@ $(BUILD_DIR)/tss.o: ${SRC_DIR}/userprog/tss.c ${SRC_DIR}/userprog/tss.h ${SRC_DI
         ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h
 	$(CC) $(CFLAGS) $< -o $@
 
-$(BUILD_DIR)/syscall-init.o: ${SRC_DIR}/userprog/syscall-init.c ${SRC_DIR}/userprog/syscall-init.h ${SRC_DIR}/userprog/tss.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/userprog/process.h ${SRC_DIR}/device/keyboard.h ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/stdint.h\
-        ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h
+$(BUILD_DIR)/syscall-init.o: ${SRC_DIR}/userprog/syscall-init.c ${SRC_DIR}/userprog/syscall-init.h ${SRC_DIR}/userprog/fork.h ${SRC_DIR}/userprog/tss.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/userprog/process.h ${SRC_DIR}/device/keyboard.h ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/stdint.h\
+        ${SRC_DIR}/lib/kernel/io.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/thread/sync.h ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/global.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/userprog/fork.h
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/syscall.o: ${LIB_DIR}/user/syscall.c ${LIB_DIR}/user/syscall.h ${SRC_DIR}/userprog/syscall-init.h ${SRC_DIR}/userprog/tss.h ${SRC_DIR}/userprog/process.h ${SRC_DIR}/device/keyboard.h ${SRC_DIR}/device/console.h ${SRC_DIR}/lib/stdint.h\
@@ -144,6 +144,10 @@ $(BUILD_DIR)/dir.o: ${SRC_DIR}/fs/dir.c ${SRC_DIR}/fs/dir.h ${SRC_DIR}/fs/file.h
 $(BUILD_DIR)/inode.o: ${SRC_DIR}/fs/inode.c ${SRC_DIR}/fs/file.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/fs/inode.h ${SRC_DIR}/fs/super_block.h ${SRC_DIR}/fs/dir.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/stdint.h \
 		${SRC_DIR}/lib/string.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/kernel/list.h	${SRC_DIR}/kernel/global.h \
    		${SRC_DIR}/lib/stdio.h ${SRC_DIR}/kernel/stdio-kernel.h ${SRC_DIR}/device/ide.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/fork.o: ${SRC_DIR}/userprog/fork.c ${SRC_DIR}/userprog/fork.h ${SRC_DIR}/userprog/process.h ${SRC_DIR}/lib/stdint.h \
+        ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/fs/file.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/lib/string.h ${SRC_DIR}/fs/file.h
 	$(CC) $(CFLAGS) $< -o $@
 
 ##############    汇编代码编译    ###############

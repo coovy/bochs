@@ -227,6 +227,20 @@ void* get_user_pages(uint32_t pg_cnt) {
    return vaddr;
 }
 
+/* 安装1页大小的vaddr, 专门针对fork时虚拟地址位图无须操作的情况 */
+void* get_a_page_without_opvaddrbitmap(enum pool_flags pf, uint32_t vaddr) {
+   struct pool* mem_pool = pf & PF_KERNEL ? &kernel_pool : &user_pool;
+   lock_acquire(&mem_pool->lock);
+   void* page_phyaddr = palloc(mem_pool);
+   if (page_phyaddr == NULL) {
+      lock_release(&mem_pool->lock);
+      return NULL;
+   }
+   page_table_add((void*)vaddr, page_phyaddr); 
+   lock_release(&mem_pool->lock);
+   return (void*)vaddr;
+}
+
 
 /* 将地址vaddr与pf池中的物理地址关联,仅支持一页空间分配 */
 void* get_a_page(enum pool_flags pf, uint32_t vaddr) {

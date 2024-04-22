@@ -1,4 +1,5 @@
 #include "syscall.h"
+#include "thread.h"
 
 /* 无参数的系统调用 */
 /*大括号最后一个参数为返回值*/
@@ -67,4 +68,8 @@ void* malloc(uint32_t size) {
 /* 释放ptr指向的内存 */
 void free(void* ptr) {
    _syscall1(SYS_FREE, ptr);
+}
+
+pid_t fork(void){
+   return _syscall0(SYS_FORK);
 }

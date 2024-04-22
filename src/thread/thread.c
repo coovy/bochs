@@ -10,6 +10,8 @@
 #include "process.h"
 
 struct lock pid_lock;
+extern void init(void);
+extern void switch_to(struct task_struct* cur, struct task_struct* next);
 
 /*分配pid*/
 static pid_t allocate_pid(void){
@@ -66,6 +68,10 @@ void thread_create(struct task_struct* pthread, thread_func function, void* func
     kthread_stack->function = function;
     kthread_stack->func_arg = func_arg;
     kthread_stack->ebp = kthread_stack->ebx = kthread_stack->esi = kthread_stack->edi = 0;// 这四个寄存器执行过程才会有值
+}
+
+pid_t fork_pid(void) {
+   return allocate_pid();
 }
 
 /*初始化线程基本信息*/
@@ -204,6 +210,7 @@ void thread_init(void){
     list_init(&thread_ready_list);
     list_init(&thread_all_list);
     lock_init(&pid_lock);
+    process_execute(init, "init");
     // 将当前main函数创建为主线程
     make_main_thread();
     idle_thread = thread_start("idle", 10, idle, NULL);
