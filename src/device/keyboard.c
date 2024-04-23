@@ -264,6 +264,7 @@ static void intr_keyboard_handler(void)
 void keyboard_init()
 {
     put_str("keyboard init start\n");
+    ioqueue_init(&kbd_buf);
     register_handler(0x21, intr_keyboard_handler);
     put_str("keyboard init done\n");
 }

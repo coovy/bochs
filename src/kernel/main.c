@@ -1,10 +1,7 @@
-#include "init.h"
 #include "print.h"
 #include "interrupt.h"
-#include "timer.h"
 #include "thread.h"
 #include "console.h"
-#include "ioqueue.h"
 #include "keyboard.h"
 #include "process.h"
 #include "syscall-init.h"
@@ -13,6 +10,8 @@
 #include "stdio.h"
 #include "fs.h"
 #include "dir.h"
+#include "assert.h"
+#include "shell.h"
 
 void init(void);
 
@@ -20,6 +19,8 @@ void init(void);
 int main(void) {
    put_str("I am kernel\n");
    init_all();
+   cls_screen();
+   console_put_str("[coovy@localhost /]$ ");
    while(1);
    return 0;
 }
@@ -29,7 +30,8 @@ void init(void){
    if(ret_pid) {
       printf("I am father process, pid: %d, child pid is %d\n", getpid(), ret_pid);
    } else {
-      printf("I am child process, pid: %d, ret pid is %d\n", getpid(), ret_pid);
+      my_shell();
    }
-   while(1);
+   panic("init: should not be here");
+   // while(1);
 }

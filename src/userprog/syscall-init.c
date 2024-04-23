@@ -5,6 +5,9 @@
 #include "thread.h"
 #include "fs.h"
 #include "fork.h"
+#include "memory.h"
+#include "string.h"
+#include "console.h"
 
 #define syscall_nr 32 
 typedef void* syscall;
@@ -23,5 +26,8 @@ void syscall_init(void) {
    syscall_table[SYS_MALLOC] = sys_malloc;
    syscall_table[SYS_FREE] = sys_free;
    syscall_table[SYS_FORK] = sys_fork;
+   syscall_table[SYS_READ] = sys_read;
+   syscall_table[SYS_PUTCHAR] = sys_putchar;
+   syscall_table[SYS_CLEAR] = cls_screen;
    put_str("syscall_init done\n");
 }

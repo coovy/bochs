@@ -8,6 +8,15 @@
         "syscall-init.h": "c",
         "*.cbak": "c",
         "random": "c",
-        "thread.h": "c"
+        "thread.h": "c",
+        "string.h": "c",
+        "fs.h": "c",
+        "*.tcc": "c",
+        "fstream": "c",
+        "iosfwd": "c",
+        "istream": "c",
+        "limits": "c",
+        "sstream": "c",
+        "streambuf": "c"
     }
 }

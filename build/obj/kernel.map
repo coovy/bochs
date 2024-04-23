@@ -77,6 +77,10 @@ Discarded input sections
                 0x0000000000000000        0x0 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
  .note.GNU-stack
                 0x0000000000000000        0x0 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 /home/yhy/workspace/cccc/bochs/build/obj/shell.o
 
 Memory Configuration
 
@@ -115,6 +119,8 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/file.o
 LOAD /home/yhy/workspace/cccc/bochs/build/obj/inode.o
 LOAD /home/yhy/workspace/cccc/bochs/build/obj/dir.o
 LOAD /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+LOAD /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+LOAD /home/yhy/workspace/cccc/bochs/build/obj/shell.o
                 [!provide]                        PROVIDE (__executable_start = SEGMENT_START ("text-segment", 0x8048000))
                 0x00000000080480d4                . = (SEGMENT_START ("text-segment", 0x8048000) + SIZEOF_HEADERS)
 
@@ -184,197 +190,207 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/fork.o
 .plt.sec
  *(.plt.sec)
 
-.text           0x00000000c0001500     0xa067
+.text           0x00000000c0001500     0xa344
  *(.text.unlikely .text.*_unlikely .text.unlikely.*)
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
  *(.text.hot .text.hot.*)
  *(SORT_BY_NAME(.text.sorted.*))
  *(.text .stub .text.* .gnu.linkonce.t.*)
- .text          0x00000000c0001500       0x6d /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .text          0x00000000c0001500       0x8b /home/yhy/workspace/cccc/bochs/build/obj/main.o
                 0x00000000c0001500                main
-                0x00000000c000151c                init
- .text          0x00000000c000156d       0x4b /home/yhy/workspace/cccc/bochs/build/obj/init.o
-                0x00000000c000156d                init_all
- .text          0x00000000c00015b8      0x47e /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
-                0x00000000c0001929                intr_enable
-                0x00000000c0001952                intr_disable
-                0x00000000c000197b                intr_set_status
-                0x00000000c0001999                intr_get_status
-                0x00000000c00019bc                idt_init
-                0x00000000c0001a1a                register_handler
- .text          0x00000000c0001a36      0x212 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
-                0x00000000c0001b90                mtime_sleep
-                0x00000000c0001be8                timer_init
- *fill*         0x00000000c0001c48        0x8 
- .text          0x00000000c0001c50      0x55b /home/yhy/workspace/cccc/bochs/build/obj/kernel.o
-                0x00000000c0001c50                intr_exit
-                0x00000000c0002187                syscall_handler
- *fill*         0x00000000c00021ab        0x5 
- .text          0x00000000c00021b0      0x172 /home/yhy/workspace/cccc/bochs/build/obj/print.o
-                0x00000000c00021b0                put_str
-                0x00000000c00021ce                put_char
-                0x00000000c000229b                put_int
-                0x00000000c00022fe                set_cursor
- .text          0x00000000c0002322       0xa5 /home/yhy/workspace/cccc/bochs/build/obj/debug.o
-                0x00000000c0002322                panic_spin
- .text          0x00000000c00023c7     0x1196 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
-                0x00000000c00024f6                pte_ptr
-                0x00000000c0002527                pde_ptr
-                0x00000000c00026d9                malloc_page
-                0x00000000c00027a3                get_kernel_pages
-                0x00000000c00027ff                get_user_pages
-                0x00000000c0002855                get_a_page_without_opvaddrbitmap
-                0x00000000c00028d0                get_a_page
-                0x00000000c0002a52                addr_v2p
-                0x00000000c0002aa8                sys_malloc
-                0x00000000c0002db8                pfree
-                0x00000000c0002f05                mfree_page
-                0x00000000c00030da                sys_free
-                0x00000000c0003487                block_desc_init
-                0x00000000c0003504                mem_init
- .text          0x00000000c000355d      0x270 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
-                0x00000000c000355d                bitmap_init
-                0x00000000c0003584                bitmap_scan_test
-                0x00000000c00035c6                bitmap_scan
-                0x00000000c0003714                bitmap_set
- .text          0x00000000c00037cd      0x454 /home/yhy/workspace/cccc/bochs/build/obj/string.o
-                0x00000000c00037cd                memset
-                0x00000000c0003829                memcpy
-                0x00000000c0003891                memcmp
-                0x00000000c0003927                strcpy
-                0x00000000c000398a                strlen
-                0x00000000c00039e4                strcmp
-                0x00000000c0003a6b                strchr
-                0x00000000c0003ad1                strrchr
-                0x00000000c0003b3a                strcat
-                0x00000000c0003bb4                strchrs
- .text          0x00000000c0003c21      0x73c /home/yhy/workspace/cccc/bochs/build/obj/thread.o
-                0x00000000c0003c6e                running_thread
-                0x00000000c0003c99                thread_create
-                0x00000000c0003d0f                fork_pid
-                0x00000000c0003d1c                init_thread
-                0x00000000c0003e11                thread_start
-                0x00000000c0003f8c                schedule
-                0x00000000c00040df                thread_block
-                0x00000000c0004146                thread_unblock
-                0x00000000c0004251                thread_yield
-                0x00000000c00042d7                thread_init
- *fill*         0x00000000c000435d        0x3 
- .text          0x00000000c0004360       0x15 /home/yhy/workspace/cccc/bochs/build/obj/switch.o
-                0x00000000c0004360                switch_to
- .text          0x00000000c0004375      0x1e4 /home/yhy/workspace/cccc/bochs/build/obj/list.o
-                0x00000000c0004375                list_init
-                0x00000000c00043a2                list_insert_before
-                0x00000000c00043e3                list_push
-                0x00000000c0004400                list_append
-                0x00000000c000441d                list_remove
-                0x00000000c0004453                list_pop
-                0x00000000c0004472                elem_find
-                0x00000000c00044ad                list_traversal
-                0x00000000c000450b                list_len
-                0x00000000c0004540                list_empty
- .text          0x00000000c0004559      0x347 /home/yhy/workspace/cccc/bochs/build/obj/sync.o
-                0x00000000c0004559                sema_init
-                0x00000000c000457e                lock_init
-                0x00000000c00045af                sema_down
-                0x00000000c00046c3                sema_up
-                0x00000000c0004779                lock_acquire
-                0x00000000c00047f5                lock_release
- .text          0x00000000c00048a0       0x9a /home/yhy/workspace/cccc/bochs/build/obj/console.o
-                0x00000000c00048a0                console_init
-                0x00000000c00048b4                console_acquire
-                0x00000000c00048c8                console_release
-                0x00000000c00048dc                console_put_str
-                0x00000000c00048f9                console_put_char
-                0x00000000c000491d                console_put_int
- .text          0x00000000c000493a      0x2ef /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
-                0x00000000c0004bf5                keyboard_init
- .text          0x00000000c0004c29      0x2f1 /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
-                0x00000000c0004c29                ioqueue_init
-                0x00000000c0004c86                ioq_full
-                0x00000000c0004cd7                ioq_empty
-                0x00000000c0004dbc                ioq_getchar
-                0x00000000c0004e6a                ioq_putchar
- .text          0x00000000c0004f1a      0x1a9 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
-                0x00000000c0004f1a                update_tss_esp
-                0x00000000c0004f95                tss_init
- .text          0x00000000c00050c3      0x372 /home/yhy/workspace/cccc/bochs/build/obj/process.o
-                0x00000000c00050c3                start_process
-                0x00000000c00051c9                page_dir_activate
-                0x00000000c00051f9                process_activate
-                0x00000000c000524b                create_page_dir
-                0x00000000c00052bc                create_user_vaddr_bitmap
-                0x00000000c000530b                process_execute
- .text          0x00000000c0005435       0x88 /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
-                0x00000000c0005435                getpid
-                0x00000000c000544a                write
-                0x00000000c000546d                malloc
-                0x00000000c000548c                free
-                0x00000000c00054a8                fork
- .text          0x00000000c00054bd       0x64 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
-                0x00000000c00054bd                sys_getpid
-                0x00000000c00054cf                syscall_init
- .text          0x00000000c0005521      0x2ba /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
-                0x00000000c00055a7                vsprintf
-                0x00000000c000572b                sprintf
-                0x00000000c000575f                printf
- .text          0x00000000c00057db       0x62 /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
-                0x00000000c00057db                printk
- .text          0x00000000c000583d      0xe01 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
-                0x00000000c0005b57                ide_read
-                0x00000000c0005ce9                ide_write
-                0x00000000c000637f                intr_hd_handler
-                0x00000000c0006440                ide_init
- .text          0x00000000c000663e     0x2100 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
-                0x00000000c0006d9e                path_depth_cnt
-                0x00000000c00070c6                sys_open
-                0x00000000c000737e                sys_read
-                0x00000000c00073ff                sys_write
-                0x00000000c00074e9                sys_lseek
-                0x00000000c00075d1                sys_close
-                0x00000000c0007626                sys_unlink
-                0x00000000c0007847                sys_mkdir
-                0x00000000c0007c74                sys_opendir
-                0x00000000c0007d8c                sys_closedir
-                0x00000000c0007db6                sys_readdir
-                0x00000000c0007df3                sys_rewinddir
-                0x00000000c0007e02                sys_rmdir
-                0x00000000c00081ac                sys_getcwd
-                0x00000000c0008399                sys_chdir
-                0x00000000c0008427                sys_stat
-                0x00000000c000854e                filesys_init
- .text          0x00000000c000873e     0x11bd /home/yhy/workspace/cccc/bochs/build/obj/file.o
-                0x00000000c000873e                get_free_slot_in_global
-                0x00000000c000878e                pcb_fd_install
-                0x00000000c00087f1                inode_bitmap_alloc
-                0x00000000c000883f                block_bitmap_alloc
-                0x00000000c0008899                bitmap_sync
-                0x00000000c0008924                file_create
-                0x00000000c0008bf3                file_open
-                0x00000000c0008cfc                file_close
-                0x00000000c0008d3b                file_write
-                0x00000000c0009522                file_read
- .text          0x00000000c00098fb      0x80f /home/yhy/workspace/cccc/bochs/build/obj/inode.o
-                0x00000000c000999f                inode_sync
-                0x00000000c0009b10                inode_open
-                0x00000000c0009c69                inode_close
-                0x00000000c0009cda                inode_delete
-                0x00000000c0009e3c                inode_release
-                0x00000000c000a0bb                inode_init
- .text          0x00000000c000a10a      0xf13 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
-                0x00000000c000a10a                open_root_dir
-                0x00000000c000a139                dir_open
-                0x00000000c000a174                search_dir_entry
-                0x00000000c000a344                dir_close
-                0x00000000c000a370                create_dir_entry
-                0x00000000c000a3e6                sync_dir_entry
-                0x00000000c000a856                delete_dir_entry
-                0x00000000c000ad1d                dir_read
-                0x00000000c000af29                dir_is_empty
-                0x00000000c000af54                dir_remove
- .text          0x00000000c000b01d      0x54a /home/yhy/workspace/cccc/bochs/build/obj/fork.o
-                0x00000000c000b431                sys_fork
+                0x00000000c000152d                init
+ .text          0x00000000c000158b       0x4b /home/yhy/workspace/cccc/bochs/build/obj/init.o
+                0x00000000c000158b                init_all
+ .text          0x00000000c00015d6      0x47e /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+                0x00000000c0001947                intr_enable
+                0x00000000c0001970                intr_disable
+                0x00000000c0001999                intr_set_status
+                0x00000000c00019b7                intr_get_status
+                0x00000000c00019da                idt_init
+                0x00000000c0001a38                register_handler
+ .text          0x00000000c0001a54      0x212 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+                0x00000000c0001bae                mtime_sleep
+                0x00000000c0001c06                timer_init
+ *fill*         0x00000000c0001c66        0xa 
+ .text          0x00000000c0001c70      0x55b /home/yhy/workspace/cccc/bochs/build/obj/kernel.o
+                0x00000000c0001c70                intr_exit
+                0x00000000c00021a7                syscall_handler
+ *fill*         0x00000000c00021cb        0x5 
+ .text          0x00000000c00021d0      0x1b1 /home/yhy/workspace/cccc/bochs/build/obj/print.o
+                0x00000000c00021d0                put_str
+                0x00000000c00021ee                put_char
+                0x00000000c00022bb                cls_screen
+                0x00000000c00022fa                put_int
+                0x00000000c000235d                set_cursor
+ .text          0x00000000c0002381       0xa5 /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+                0x00000000c0002381                panic_spin
+ .text          0x00000000c0002426     0x1196 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+                0x00000000c0002555                pte_ptr
+                0x00000000c0002586                pde_ptr
+                0x00000000c0002738                malloc_page
+                0x00000000c0002802                get_kernel_pages
+                0x00000000c000285e                get_user_pages
+                0x00000000c00028b4                get_a_page_without_opvaddrbitmap
+                0x00000000c000292f                get_a_page
+                0x00000000c0002ab1                addr_v2p
+                0x00000000c0002b07                sys_malloc
+                0x00000000c0002e17                pfree
+                0x00000000c0002f64                mfree_page
+                0x00000000c0003139                sys_free
+                0x00000000c00034e6                block_desc_init
+                0x00000000c0003563                mem_init
+ .text          0x00000000c00035bc      0x270 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+                0x00000000c00035bc                bitmap_init
+                0x00000000c00035e3                bitmap_scan_test
+                0x00000000c0003625                bitmap_scan
+                0x00000000c0003773                bitmap_set
+ .text          0x00000000c000382c      0x454 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+                0x00000000c000382c                memset
+                0x00000000c0003888                memcpy
+                0x00000000c00038f0                memcmp
+                0x00000000c0003986                strcpy
+                0x00000000c00039e9                strlen
+                0x00000000c0003a43                strcmp
+                0x00000000c0003aca                strchr
+                0x00000000c0003b30                strrchr
+                0x00000000c0003b99                strcat
+                0x00000000c0003c13                strchrs
+ .text          0x00000000c0003c80      0x73c /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+                0x00000000c0003ccd                running_thread
+                0x00000000c0003cf8                thread_create
+                0x00000000c0003d6e                fork_pid
+                0x00000000c0003d7b                init_thread
+                0x00000000c0003e70                thread_start
+                0x00000000c0003feb                schedule
+                0x00000000c000413e                thread_block
+                0x00000000c00041a5                thread_unblock
+                0x00000000c00042b0                thread_yield
+                0x00000000c0004336                thread_init
+ *fill*         0x00000000c00043bc        0x4 
+ .text          0x00000000c00043c0       0x15 /home/yhy/workspace/cccc/bochs/build/obj/switch.o
+                0x00000000c00043c0                switch_to
+ .text          0x00000000c00043d5      0x1e4 /home/yhy/workspace/cccc/bochs/build/obj/list.o
+                0x00000000c00043d5                list_init
+                0x00000000c0004402                list_insert_before
+                0x00000000c0004443                list_push
+                0x00000000c0004460                list_append
+                0x00000000c000447d                list_remove
+                0x00000000c00044b3                list_pop
+                0x00000000c00044d2                elem_find
+                0x00000000c000450d                list_traversal
+                0x00000000c000456b                list_len
+                0x00000000c00045a0                list_empty
+ .text          0x00000000c00045b9      0x347 /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+                0x00000000c00045b9                sema_init
+                0x00000000c00045de                lock_init
+                0x00000000c000460f                sema_down
+                0x00000000c0004723                sema_up
+                0x00000000c00047d9                lock_acquire
+                0x00000000c0004855                lock_release
+ .text          0x00000000c0004900       0x9a /home/yhy/workspace/cccc/bochs/build/obj/console.o
+                0x00000000c0004900                console_init
+                0x00000000c0004914                console_acquire
+                0x00000000c0004928                console_release
+                0x00000000c000493c                console_put_str
+                0x00000000c0004959                console_put_char
+                0x00000000c000497d                console_put_int
+ .text          0x00000000c000499a      0x2fb /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+                0x00000000c0004c55                keyboard_init
+ .text          0x00000000c0004c95      0x2f1 /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+                0x00000000c0004c95                ioqueue_init
+                0x00000000c0004cf2                ioq_full
+                0x00000000c0004d43                ioq_empty
+                0x00000000c0004e28                ioq_getchar
+                0x00000000c0004ed6                ioq_putchar
+ .text          0x00000000c0004f86      0x1a9 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+                0x00000000c0004f86                update_tss_esp
+                0x00000000c0005001                tss_init
+ .text          0x00000000c000512f      0x372 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+                0x00000000c000512f                start_process
+                0x00000000c0005235                page_dir_activate
+                0x00000000c0005265                process_activate
+                0x00000000c00052b7                create_page_dir
+                0x00000000c0005328                create_user_vaddr_bitmap
+                0x00000000c0005377                process_execute
+ .text          0x00000000c00054a1       0xe0 /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+                0x00000000c00054a1                getpid
+                0x00000000c00054b6                write
+                0x00000000c00054d9                malloc
+                0x00000000c00054f8                free
+                0x00000000c0005514                fork
+                0x00000000c0005529                read
+                0x00000000c000554c                putchar
+                0x00000000c000556f                clear
+ .text          0x00000000c0005581       0x82 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+                0x00000000c0005581                sys_getpid
+                0x00000000c0005593                syscall_init
+ .text          0x00000000c0005603      0x2ba /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+                0x00000000c0005689                vsprintf
+                0x00000000c000580d                sprintf
+                0x00000000c0005841                printf
+ .text          0x00000000c00058bd       0x62 /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+                0x00000000c00058bd                printk
+ .text          0x00000000c000591f      0xe01 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+                0x00000000c0005c39                ide_read
+                0x00000000c0005dcb                ide_write
+                0x00000000c0006461                intr_hd_handler
+                0x00000000c0006522                ide_init
+ .text          0x00000000c0006720     0x217f /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+                0x00000000c0006e80                path_depth_cnt
+                0x00000000c00071a8                sys_open
+                0x00000000c0007460                sys_read
+                0x00000000c0007543                sys_putchar
+                0x00000000c0007560                sys_write
+                0x00000000c000764a                sys_lseek
+                0x00000000c0007732                sys_close
+                0x00000000c0007787                sys_unlink
+                0x00000000c00079a8                sys_mkdir
+                0x00000000c0007dd5                sys_opendir
+                0x00000000c0007eed                sys_closedir
+                0x00000000c0007f17                sys_readdir
+                0x00000000c0007f54                sys_rewinddir
+                0x00000000c0007f63                sys_rmdir
+                0x00000000c000830d                sys_getcwd
+                0x00000000c00084fa                sys_chdir
+                0x00000000c0008588                sys_stat
+                0x00000000c00086af                filesys_init
+ .text          0x00000000c000889f     0x11bd /home/yhy/workspace/cccc/bochs/build/obj/file.o
+                0x00000000c000889f                get_free_slot_in_global
+                0x00000000c00088ef                pcb_fd_install
+                0x00000000c0008952                inode_bitmap_alloc
+                0x00000000c00089a0                block_bitmap_alloc
+                0x00000000c00089fa                bitmap_sync
+                0x00000000c0008a85                file_create
+                0x00000000c0008d54                file_open
+                0x00000000c0008e5d                file_close
+                0x00000000c0008e9c                file_write
+                0x00000000c0009683                file_read
+ .text          0x00000000c0009a5c      0x80f /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+                0x00000000c0009b00                inode_sync
+                0x00000000c0009c71                inode_open
+                0x00000000c0009dca                inode_close
+                0x00000000c0009e3b                inode_delete
+                0x00000000c0009f9d                inode_release
+                0x00000000c000a21c                inode_init
+ .text          0x00000000c000a26b      0xf13 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+                0x00000000c000a26b                open_root_dir
+                0x00000000c000a29a                dir_open
+                0x00000000c000a2d5                search_dir_entry
+                0x00000000c000a4a5                dir_close
+                0x00000000c000a4d1                create_dir_entry
+                0x00000000c000a547                sync_dir_entry
+                0x00000000c000a9b7                delete_dir_entry
+                0x00000000c000ae7e                dir_read
+                0x00000000c000b08a                dir_is_empty
+                0x00000000c000b0b5                dir_remove
+ .text          0x00000000c000b17e      0x54a /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+                0x00000000c000b592                sys_fork
+ .text          0x00000000c000b6c8       0x30 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+                0x00000000c000b6c8                user_spin
+ .text          0x00000000c000b6f8      0x14c /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+                0x00000000c000b6f8                print_prompt
+                0x00000000c000b7f7                my_shell
  *(.gnu.warning)
 
 .fini
@@ -385,41 +401,44 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/fork.o
                 0x00000000c000c000                . = ALIGN (CONSTANT (MAXPAGESIZE))
                 0x00000000c000c000                . = SEGMENT_START ("rodata-segment", (ALIGN (CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 0x1))))
 
-.rodata         0x00000000c000c000     0x23ba
+.rodata         0x00000000c000c000     0x24e2
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00000000c000c000       0x6c /home/yhy/workspace/cccc/bochs/build/obj/main.o
- .rodata        0x00000000c000c06c        0xa /home/yhy/workspace/cccc/bochs/build/obj/init.o
- *fill*         0x00000000c000c076        0x2 
- .rodata        0x00000000c000c078      0x2d1 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
- *fill*         0x00000000c000c349        0x3 
- .rodata        0x00000000c000c34c       0xac /home/yhy/workspace/cccc/bochs/build/obj/timer.o
- .rodata        0x00000000c000c3f8       0x3f /home/yhy/workspace/cccc/bochs/build/obj/debug.o
- *fill*         0x00000000c000c437        0x1 
- .rodata        0x00000000c000c438      0x3d6 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
- *fill*         0x00000000c000c80e        0x2 
- .rodata        0x00000000c000c810       0x8b /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
- *fill*         0x00000000c000c89b        0x1 
- .rodata        0x00000000c000c89c       0xdf /home/yhy/workspace/cccc/bochs/build/obj/string.o
- *fill*         0x00000000c000c97b        0x1 
- .rodata        0x00000000c000c97c      0x2f9 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
- *fill*         0x00000000c000cc75        0x3 
- .rodata        0x00000000c000cc78      0x153 /home/yhy/workspace/cccc/bochs/build/obj/sync.o
- .rodata        0x00000000c000cdcb       0x36 /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
- *fill*         0x00000000c000ce01        0x3 
- .rodata        0x00000000c000ce04       0xc1 /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
- .rodata        0x00000000c000cec5       0x27 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
- .rodata        0x00000000c000ceec      0x105 /home/yhy/workspace/cccc/bochs/build/obj/process.o
- .rodata        0x00000000c000cff1       0x27 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
- .rodata        0x00000000c000d018      0x203 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
- *fill*         0x00000000c000d21b        0x1 
- .rodata        0x00000000c000d21c      0x8d2 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
- *fill*         0x00000000c000daee        0x2 
- .rodata        0x00000000c000daf0      0x45c /home/yhy/workspace/cccc/bochs/build/obj/file.o
- .rodata        0x00000000c000df4c       0xdf /home/yhy/workspace/cccc/bochs/build/obj/inode.o
- *fill*         0x00000000c000e02b        0x1 
- .rodata        0x00000000c000e02c      0x227 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
- *fill*         0x00000000c000e253        0x1 
- .rodata        0x00000000c000e254      0x166 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .rodata        0x00000000c000c000       0xa2 /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .rodata        0x00000000c000c0a2        0xa /home/yhy/workspace/cccc/bochs/build/obj/init.o
+ .rodata        0x00000000c000c0ac      0x2d1 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+ *fill*         0x00000000c000c37d        0x3 
+ .rodata        0x00000000c000c380       0xac /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+ .rodata        0x00000000c000c42c       0x3f /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+ *fill*         0x00000000c000c46b        0x1 
+ .rodata        0x00000000c000c46c      0x3d6 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+ *fill*         0x00000000c000c842        0x2 
+ .rodata        0x00000000c000c844       0x8b /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+ *fill*         0x00000000c000c8cf        0x1 
+ .rodata        0x00000000c000c8d0       0xdf /home/yhy/workspace/cccc/bochs/build/obj/string.o
+ *fill*         0x00000000c000c9af        0x1 
+ .rodata        0x00000000c000c9b0      0x2f9 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+ *fill*         0x00000000c000cca9        0x3 
+ .rodata        0x00000000c000ccac      0x153 /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+ .rodata        0x00000000c000cdff       0x36 /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ *fill*         0x00000000c000ce35        0x3 
+ .rodata        0x00000000c000ce38       0xc1 /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+ .rodata        0x00000000c000cef9       0x27 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+ .rodata        0x00000000c000cf20      0x105 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+ .rodata        0x00000000c000d025       0x27 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+ .rodata        0x00000000c000d04c      0x203 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+ *fill*         0x00000000c000d24f        0x1 
+ .rodata        0x00000000c000d250      0x8d2 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+ *fill*         0x00000000c000db22        0x2 
+ .rodata        0x00000000c000db24      0x45c /home/yhy/workspace/cccc/bochs/build/obj/file.o
+ .rodata        0x00000000c000df80       0xdf /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+ *fill*         0x00000000c000e05f        0x1 
+ .rodata        0x00000000c000e060      0x227 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+ *fill*         0x00000000c000e287        0x1 
+ .rodata        0x00000000c000e288      0x166 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ *fill*         0x00000000c000e3ee        0x2 
+ .rodata        0x00000000c000e3f0       0x32 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ *fill*         0x00000000c000e422        0x2 
+ .rodata        0x00000000c000e424       0xbe /home/yhy/workspace/cccc/bochs/build/obj/shell.o
 
 .rodata1
  *(.rodata1)
@@ -548,6 +567,8 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/fork.o
  .data          0x00000000c000f156        0x0 /home/yhy/workspace/cccc/bochs/build/obj/inode.o
  .data          0x00000000c000f156        0x0 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
  .data          0x00000000c000f156        0x0 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .data          0x00000000c000f156        0x0 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .data          0x00000000c000f156        0x0 /home/yhy/workspace/cccc/bochs/build/obj/shell.o
 
 .data1
  *(.data1)
@@ -556,7 +577,7 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/fork.o
                 0x00000000c000f156                . = .
                 0x00000000c000f156                __bss_start = .
 
-.bss            0x00000000c000f160     0x1c08
+.bss            0x00000000c000f160     0x1cc8
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x00000000c000f160        0x0 /home/yhy/workspace/cccc/bochs/build/obj/main.o
@@ -589,49 +610,52 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/fork.o
  .bss           0x00000000c000f612        0x0 /home/yhy/workspace/cccc/bochs/build/obj/inode.o
  .bss           0x00000000c000f612        0x0 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
  .bss           0x00000000c000f612        0x0 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
- *(COMMON)
+ .bss           0x00000000c000f612        0x0 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
  *fill*         0x00000000c000f612        0xe 
- COMMON         0x00000000c000f620      0x424 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
-                0x00000000c000f620                intr_name
-                0x00000000c000f840                idt_table
- COMMON         0x00000000c000fa44        0x4 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
-                0x00000000c000fa44                ticks
- *fill*         0x00000000c000fa48       0x18 
- COMMON         0x00000000c000fa60      0x12c /home/yhy/workspace/cccc/bochs/build/obj/memory.o
-                0x00000000c000fa60                user_pool
-                0x00000000c000faa0                k_block_descs
-                0x00000000c000fb48                kernel_vaddr
-                0x00000000c000fb60                kernel_pool
- COMMON         0x00000000c000fb8c       0x44 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
-                0x00000000c000fb8c                thread_ready_list
-                0x00000000c000fb9c                thread_all_list
-                0x00000000c000fbac                idle_thread
-                0x00000000c000fbb0                main_thread
-                0x00000000c000fbb4                pid_lock
- *fill*         0x00000000c000fbd0       0x10 
- COMMON         0x00000000c000fbe0       0x6c /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
-                0x00000000c000fbe0                kbd_buf
- *fill*         0x00000000c000fc4c       0x14 
- COMMON         0x00000000c000fc60       0x80 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
-                0x00000000c000fc60                syscall_table
- COMMON         0x00000000c000fce0      0xcf0 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
-                0x00000000c000fce0                channel_cnt
-                0x00000000c000fd00                channels
-                0x00000000c00109c0                partition_list
- COMMON         0x00000000c00109d0        0x4 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
-                0x00000000c00109d0                cur_part
- *fill*         0x00000000c00109d4        0xc 
- COMMON         0x00000000c00109e0      0x180 /home/yhy/workspace/cccc/bochs/build/obj/file.o
-                0x00000000c00109e0                file_table
- COMMON         0x00000000c0010b60      0x208 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
-                0x00000000c0010b60                root_dir
-                0x00000000c0010d68                . = ALIGN ((. != 0x0)?0x4:0x1)
-                0x00000000c0010d68                . = ALIGN (0x4)
-                0x00000000c0010d68                . = SEGMENT_START ("ldata-segment", .)
-                0x00000000c0010d68                . = ALIGN (0x4)
-                0x00000000c0010d68                _end = .
+ .bss           0x00000000c000f620       0xc0 /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+                0x00000000c000f620                cwd_cache
+ *(COMMON)
+ COMMON         0x00000000c000f6e0      0x424 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+                0x00000000c000f6e0                intr_name
+                0x00000000c000f900                idt_table
+ COMMON         0x00000000c000fb04        0x4 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+                0x00000000c000fb04                ticks
+ *fill*         0x00000000c000fb08       0x18 
+ COMMON         0x00000000c000fb20      0x12c /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+                0x00000000c000fb20                user_pool
+                0x00000000c000fb60                k_block_descs
+                0x00000000c000fc08                kernel_vaddr
+                0x00000000c000fc20                kernel_pool
+ COMMON         0x00000000c000fc4c       0x44 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+                0x00000000c000fc4c                thread_ready_list
+                0x00000000c000fc5c                thread_all_list
+                0x00000000c000fc6c                idle_thread
+                0x00000000c000fc70                main_thread
+                0x00000000c000fc74                pid_lock
+ *fill*         0x00000000c000fc90       0x10 
+ COMMON         0x00000000c000fca0       0x6c /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+                0x00000000c000fca0                kbd_buf
+ *fill*         0x00000000c000fd0c       0x14 
+ COMMON         0x00000000c000fd20       0x80 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+                0x00000000c000fd20                syscall_table
+ COMMON         0x00000000c000fda0      0xcf0 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+                0x00000000c000fda0                channel_cnt
+                0x00000000c000fdc0                channels
+                0x00000000c0010a80                partition_list
+ COMMON         0x00000000c0010a90        0x4 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+                0x00000000c0010a90                cur_part
+ *fill*         0x00000000c0010a94        0xc 
+ COMMON         0x00000000c0010aa0      0x180 /home/yhy/workspace/cccc/bochs/build/obj/file.o
+                0x00000000c0010aa0                file_table
+ COMMON         0x00000000c0010c20      0x208 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+                0x00000000c0010c20                root_dir
+                0x00000000c0010e28                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x00000000c0010e28                . = ALIGN (0x4)
+                0x00000000c0010e28                . = SEGMENT_START ("ldata-segment", .)
+                0x00000000c0010e28                . = ALIGN (0x4)
+                0x00000000c0010e28                _end = .
                 [!provide]                        PROVIDE (end = .)
-                0x00000000c0010d68                . = DATA_SEGMENT_END (.)
+                0x00000000c0010e28                . = DATA_SEGMENT_END (.)
 
 .stab
  *(.stab)
@@ -680,6 +704,8 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/fork.o
  .comment       0x000000000000002a       0x2b /home/yhy/workspace/cccc/bochs/build/obj/inode.o
  .comment       0x000000000000002a       0x2b /home/yhy/workspace/cccc/bochs/build/obj/dir.o
  .comment       0x000000000000002a       0x2b /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .comment       0x000000000000002a       0x2b /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .comment       0x000000000000002a       0x2b /home/yhy/workspace/cccc/bochs/build/obj/shell.o
 
 .gnu.build.attributes
  *(.gnu.build.attributes .gnu.build.attributes.*)
