@@ -771,29 +771,360 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges
+.debug_aranges  0x0000000000000000      0x3c0
  *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .debug_aranges
+                0x0000000000000020       0x20 /home/yhy/workspace/cccc/bochs/build/obj/init.o
+ .debug_aranges
+                0x0000000000000040       0x20 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+ .debug_aranges
+                0x0000000000000060       0x20 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+ .debug_aranges
+                0x0000000000000080       0x20 /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+ .debug_aranges
+                0x00000000000000a0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+ .debug_aranges
+                0x00000000000000c0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+ .debug_aranges
+                0x00000000000000e0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+ .debug_aranges
+                0x0000000000000100       0x20 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+ .debug_aranges
+                0x0000000000000120       0x20 /home/yhy/workspace/cccc/bochs/build/obj/list.o
+ .debug_aranges
+                0x0000000000000140       0x20 /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+ .debug_aranges
+                0x0000000000000160       0x20 /home/yhy/workspace/cccc/bochs/build/obj/console.o
+ .debug_aranges
+                0x0000000000000180       0x20 /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ .debug_aranges
+                0x00000000000001a0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+ .debug_aranges
+                0x00000000000001c0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+ .debug_aranges
+                0x00000000000001e0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+ .debug_aranges
+                0x0000000000000200       0x20 /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+ .debug_aranges
+                0x0000000000000220       0x20 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+ .debug_aranges
+                0x0000000000000240       0x20 /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+ .debug_aranges
+                0x0000000000000260       0x20 /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+ .debug_aranges
+                0x0000000000000280       0x20 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+ .debug_aranges
+                0x00000000000002a0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+ .debug_aranges
+                0x00000000000002c0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/file.o
+ .debug_aranges
+                0x00000000000002e0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+ .debug_aranges
+                0x0000000000000300       0x20 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+ .debug_aranges
+                0x0000000000000320       0x20 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .debug_aranges
+                0x0000000000000340       0x20 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .debug_aranges
+                0x0000000000000360       0x20 /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+ .debug_aranges
+                0x0000000000000380       0x20 /home/yhy/workspace/cccc/bochs/build/obj/buildin_cmd.o
+ .debug_aranges
+                0x00000000000003a0       0x20 /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 
 .debug_pubnames
+                0x0000000000000000      0xe4e
  *(.debug_pubnames)
+ .debug_pubnames
+                0x0000000000000000       0x24 /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .debug_pubnames
+                0x0000000000000024       0x1f /home/yhy/workspace/cccc/bochs/build/obj/init.o
+ .debug_pubnames
+                0x0000000000000043       0x99 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+ .debug_pubnames
+                0x00000000000000dc       0x3b /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+ .debug_pubnames
+                0x0000000000000117       0x21 /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+ .debug_pubnames
+                0x0000000000000138      0x13a /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+ .debug_pubnames
+                0x0000000000000272       0x56 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+ .debug_pubnames
+                0x00000000000002c8       0x82 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+ .debug_pubnames
+                0x000000000000034a      0x119 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+ .debug_pubnames
+                0x0000000000000463       0xaf /home/yhy/workspace/cccc/bochs/build/obj/list.o
+ .debug_pubnames
+                0x0000000000000512       0x6a /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+ .debug_pubnames
+                0x000000000000057c       0x88 /home/yhy/workspace/cccc/bochs/build/obj/console.o
+ .debug_pubnames
+                0x0000000000000604       0x30 /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ .debug_pubnames
+                0x0000000000000634       0x5e /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+ .debug_pubnames
+                0x0000000000000692       0x32 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+ .debug_pubnames
+                0x00000000000006c4       0x94 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+ .debug_pubnames
+                0x0000000000000758      0x101 /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+ .debug_pubnames
+                0x0000000000000859       0x44 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+ .debug_pubnames
+                0x000000000000089d       0x36 /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+ .debug_pubnames
+                0x00000000000008d3       0x1d /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+ .debug_pubnames
+                0x00000000000008f0       0xa1 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+ .debug_pubnames
+                0x0000000000000991      0x13e /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+ .debug_pubnames
+                0x0000000000000acf       0xd8 /home/yhy/workspace/cccc/bochs/build/obj/file.o
+ .debug_pubnames
+                0x0000000000000ba7       0x72 /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+ .debug_pubnames
+                0x0000000000000c19       0xcb /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+ .debug_pubnames
+                0x0000000000000ce4       0x1f /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .debug_pubnames
+                0x0000000000000d03       0x20 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .debug_pubnames
+                0x0000000000000d23       0x5f /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+ .debug_pubnames
+                0x0000000000000d82       0xac /home/yhy/workspace/cccc/bochs/build/obj/buildin_cmd.o
+ .debug_pubnames
+                0x0000000000000e2e       0x20 /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 
-.debug_info
+.debug_info     0x0000000000000000     0xbfb0
  *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0x5e2 /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .debug_info    0x00000000000005e2       0x79 /home/yhy/workspace/cccc/bochs/build/obj/init.o
+ .debug_info    0x000000000000065b      0x3c6 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+ .debug_info    0x0000000000000a21      0x483 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+ .debug_info    0x0000000000000ea4       0xc4 /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+ .debug_info    0x0000000000000f68      0xdb7 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+ .debug_info    0x0000000000001d1f      0x270 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+ .debug_info    0x0000000000001f8f      0x388 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+ .debug_info    0x0000000000002317      0x940 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+ .debug_info    0x0000000000002c57      0x358 /home/yhy/workspace/cccc/bochs/build/obj/list.o
+ .debug_info    0x0000000000002faf      0x51c /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+ .debug_info    0x00000000000034cb      0x40f /home/yhy/workspace/cccc/bochs/build/obj/console.o
+ .debug_info    0x00000000000038da      0x541 /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ .debug_info    0x0000000000003e1b      0x5fe /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+ .debug_info    0x0000000000004419      0x5c5 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+ .debug_info    0x00000000000049de      0x600 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+ .debug_info    0x0000000000004fde      0x81d /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+ .debug_info    0x00000000000057fb      0x163 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+ .debug_info    0x000000000000595e      0x23d /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+ .debug_info    0x0000000000005b9b       0xd7 /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+ .debug_info    0x0000000000005c72      0xd83 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+ .debug_info    0x00000000000069f5     0x1756 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+ .debug_info    0x000000000000814b      0xd57 /home/yhy/workspace/cccc/bochs/build/obj/file.o
+ .debug_info    0x0000000000008ea2      0xa92 /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+ .debug_info    0x0000000000009934      0xd0e /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+ .debug_info    0x000000000000a642      0x7b7 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .debug_info    0x000000000000adf9       0xc4 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .debug_info    0x000000000000aebd      0x30f /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+ .debug_info    0x000000000000b1cc      0x5b3 /home/yhy/workspace/cccc/bochs/build/obj/buildin_cmd.o
+ .debug_info    0x000000000000b77f      0x831 /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 
-.debug_abbrev
+.debug_abbrev   0x0000000000000000     0x23c8
  *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000      0x135 /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .debug_abbrev  0x0000000000000135       0x46 /home/yhy/workspace/cccc/bochs/build/obj/init.o
+ .debug_abbrev  0x000000000000017b      0x146 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+ .debug_abbrev  0x00000000000002c1      0x140 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+ .debug_abbrev  0x0000000000000401       0x5e /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+ .debug_abbrev  0x000000000000045f      0x206 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+ .debug_abbrev  0x0000000000000665       0xe8 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+ .debug_abbrev  0x000000000000074d       0xd4 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+ .debug_abbrev  0x0000000000000821      0x1d3 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+ .debug_abbrev  0x00000000000009f4       0xfa /home/yhy/workspace/cccc/bochs/build/obj/list.o
+ .debug_abbrev  0x0000000000000aee       0xff /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+ .debug_abbrev  0x0000000000000bed      0x106 /home/yhy/workspace/cccc/bochs/build/obj/console.o
+ .debug_abbrev  0x0000000000000cf3      0x12d /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ .debug_abbrev  0x0000000000000e20      0x14a /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+ .debug_abbrev  0x0000000000000f6a      0x120 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+ .debug_abbrev  0x000000000000108a      0x13d /home/yhy/workspace/cccc/bochs/build/obj/process.o
+ .debug_abbrev  0x00000000000011c7      0x11f /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+ .debug_abbrev  0x00000000000012e6       0xac /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+ .debug_abbrev  0x0000000000001392       0xcd /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+ .debug_abbrev  0x000000000000145f       0xa9 /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+ .debug_abbrev  0x0000000000001508      0x20e /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+ .debug_abbrev  0x0000000000001716      0x231 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+ .debug_abbrev  0x0000000000001947      0x1cf /home/yhy/workspace/cccc/bochs/build/obj/file.o
+ .debug_abbrev  0x0000000000001b16      0x15d /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+ .debug_abbrev  0x0000000000001c73      0x1c4 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+ .debug_abbrev  0x0000000000001e37      0x143 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .debug_abbrev  0x0000000000001f7a       0x5e /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .debug_abbrev  0x0000000000001fd8      0x15a /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+ .debug_abbrev  0x0000000000002132      0x147 /home/yhy/workspace/cccc/bochs/build/obj/buildin_cmd.o
+ .debug_abbrev  0x0000000000002279      0x14f /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 
-.debug_line
+.debug_line     0x0000000000000000     0x3381
  *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x0000000000000000      0x1a1 /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .debug_line    0x00000000000001a1       0x6d /home/yhy/workspace/cccc/bochs/build/obj/init.o
+ .debug_line    0x000000000000020e      0x168 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+ .debug_line    0x0000000000000376      0x17e /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+ .debug_line    0x00000000000004f4       0x70 /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+ .debug_line    0x0000000000000564      0x2f1 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+ .debug_line    0x0000000000000855       0xe5 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+ .debug_line    0x000000000000093a       0xc1 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+ .debug_line    0x00000000000009fb      0x267 /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+ .debug_line    0x0000000000000c62      0x119 /home/yhy/workspace/cccc/bochs/build/obj/list.o
+ .debug_line    0x0000000000000d7b      0x17c /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+ .debug_line    0x0000000000000ef7      0x167 /home/yhy/workspace/cccc/bochs/build/obj/console.o
+ .debug_line    0x000000000000105e      0x1ea /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ .debug_line    0x0000000000001248      0x1b1 /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+ .debug_line    0x00000000000013f9      0x173 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+ .debug_line    0x000000000000156c      0x1a5 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+ .debug_line    0x0000000000001711      0x15d /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+ .debug_line    0x000000000000186e       0xf3 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+ .debug_line    0x0000000000001961       0xbf /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+ .debug_line    0x0000000000001a20       0xa0 /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+ .debug_line    0x0000000000001ac0      0x2b6 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+ .debug_line    0x0000000000001d76      0x4fc /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+ .debug_line    0x0000000000002272      0x384 /home/yhy/workspace/cccc/bochs/build/obj/file.o
+ .debug_line    0x00000000000025f6      0x27b /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+ .debug_line    0x0000000000002871      0x34b /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+ .debug_line    0x0000000000002bbc      0x218 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .debug_line    0x0000000000002dd4       0x66 /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .debug_line    0x0000000000002e3a      0x15c /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+ .debug_line    0x0000000000002f96      0x20a /home/yhy/workspace/cccc/bochs/build/obj/buildin_cmd.o
+ .debug_line    0x00000000000031a0      0x1e1 /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 
-.debug_frame
+.debug_frame    0x0000000000000000     0x19f8
  *(.debug_frame)
+ .debug_frame   0x0000000000000000       0x44 /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .debug_frame   0x0000000000000044       0x2c /home/yhy/workspace/cccc/bochs/build/obj/init.o
+ .debug_frame   0x0000000000000070      0x13c /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+ .debug_frame   0x00000000000001ac       0xac /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+ .debug_frame   0x0000000000000258       0x2c /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+ .debug_frame   0x0000000000000284      0x224 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+ .debug_frame   0x00000000000004a8       0x88 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+ .debug_frame   0x0000000000000530      0x104 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+ .debug_frame   0x0000000000000634      0x1ac /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+ .debug_frame   0x00000000000007e0      0x104 /home/yhy/workspace/cccc/bochs/build/obj/list.o
+ .debug_frame   0x00000000000008e4       0xac /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+ .debug_frame   0x0000000000000990       0xa4 /home/yhy/workspace/cccc/bochs/build/obj/console.o
+ .debug_frame   0x0000000000000a34       0x5c /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ .debug_frame   0x0000000000000a90       0xd4 /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+ .debug_frame   0x0000000000000b64       0x60 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+ .debug_frame   0x0000000000000bc4       0xa4 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+ .debug_frame   0x0000000000000c68      0x288 /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+ .debug_frame   0x0000000000000ef0       0x44 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+ .debug_frame   0x0000000000000f34       0x80 /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+ .debug_frame   0x0000000000000fb4       0x34 /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+ .debug_frame   0x0000000000000fe8      0x1d4 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+ .debug_frame   0x00000000000011bc      0x298 /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+ .debug_frame   0x0000000000001454      0x10c /home/yhy/workspace/cccc/bochs/build/obj/file.o
+ .debug_frame   0x0000000000001560       0xc4 /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+ .debug_frame   0x0000000000001624      0x11c /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+ .debug_frame   0x0000000000001740       0xa8 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .debug_frame   0x00000000000017e8       0x2c /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .debug_frame   0x0000000000001814       0x74 /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+ .debug_frame   0x0000000000001888      0x114 /home/yhy/workspace/cccc/bochs/build/obj/buildin_cmd.o
+ .debug_frame   0x000000000000199c       0x5c /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 
-.debug_str
+.debug_str      0x0000000000000000     0x2642
  *(.debug_str)
+ .debug_str     0x0000000000000000      0x34a /home/yhy/workspace/cccc/bochs/build/obj/main.o
+                                        0x3d1 (size before relaxing)
+ .debug_str     0x000000000000034a       0x3a /home/yhy/workspace/cccc/bochs/build/obj/init.o
+                                         0xb4 (size before relaxing)
+ .debug_str     0x0000000000000384      0x1e1 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+                                        0x28e (size before relaxing)
+ .debug_str     0x0000000000000565       0xd8 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+                                        0x331 (size before relaxing)
+ .debug_str     0x000000000000063d       0x50 /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+                                         0xd4 (size before relaxing)
+ .debug_str     0x000000000000068d      0x2cd /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+                                        0x5cc (size before relaxing)
+ .debug_str     0x000000000000095a       0x9f /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+                                        0x17c (size before relaxing)
+ .debug_str     0x00000000000009f9       0x93 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+                                        0x130 (size before relaxing)
+ .debug_str     0x0000000000000a8c      0x1dd /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+                                        0x4c2 (size before relaxing)
+ .debug_str     0x0000000000000c69       0xb9 /home/yhy/workspace/cccc/bochs/build/obj/list.o
+                                        0x1a9 (size before relaxing)
+ .debug_str     0x0000000000000d22       0x8c /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+                                        0x32a (size before relaxing)
+ .debug_str     0x0000000000000dae       0xa9 /home/yhy/workspace/cccc/bochs/build/obj/console.o
+                                        0x316 (size before relaxing)
+ .debug_str     0x0000000000000e57      0x116 /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+                                        0x3a5 (size before relaxing)
+ .debug_str     0x0000000000000f6d       0x8c /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+                                        0x33e (size before relaxing)
+ .debug_str     0x0000000000000ff9      0x10d /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+                                        0x384 (size before relaxing)
+ .debug_str     0x0000000000001106      0x131 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+                                        0x3f9 (size before relaxing)
+ .debug_str     0x0000000000001237      0x184 /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+                                        0x2fb (size before relaxing)
+ .debug_str     0x00000000000013bb       0x69 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+                                        0x1e6 (size before relaxing)
+ .debug_str     0x0000000000001424       0x84 /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+                                        0x13f (size before relaxing)
+ .debug_str     0x00000000000014a8       0x40 /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+                                         0xce (size before relaxing)
+ .debug_str     0x00000000000014e8      0x23b /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+                                        0x5c2 (size before relaxing)
+ .debug_str     0x0000000000001723      0x57d /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+                                        0xa74 (size before relaxing)
+ .debug_str     0x0000000000001ca0      0x1e5 /home/yhy/workspace/cccc/bochs/build/obj/file.o
+                                        0x7cc (size before relaxing)
+ .debug_str     0x0000000000001e85      0x113 /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+                                        0x610 (size before relaxing)
+ .debug_str     0x0000000000001f98      0x13c /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+                                        0x6a3 (size before relaxing)
+ .debug_str     0x00000000000020d4      0x154 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+                                        0x4c6 (size before relaxing)
+ .debug_str     0x0000000000002228       0x3f /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+                                         0xd6 (size before relaxing)
+ .debug_str     0x0000000000002267       0x9d /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+                                        0x1b3 (size before relaxing)
+ .debug_str     0x0000000000002304      0x11f /home/yhy/workspace/cccc/bochs/build/obj/buildin_cmd.o
+                                        0x2d6 (size before relaxing)
+ .debug_str     0x0000000000002423      0x21f /home/yhy/workspace/cccc/bochs/build/obj/exec.o
+                                        0x54c (size before relaxing)
 
-.debug_loc
+.debug_loc      0x0000000000000000     0x296c
  *(.debug_loc)
+ .debug_loc     0x0000000000000000       0x58 /home/yhy/workspace/cccc/bochs/build/obj/main.o
+ .debug_loc     0x0000000000000058       0x2c /home/yhy/workspace/cccc/bochs/build/obj/init.o
+ .debug_loc     0x0000000000000084      0x210 /home/yhy/workspace/cccc/bochs/build/obj/interrupt.o
+ .debug_loc     0x0000000000000294      0x108 /home/yhy/workspace/cccc/bochs/build/obj/timer.o
+ .debug_loc     0x000000000000039c       0x2c /home/yhy/workspace/cccc/bochs/build/obj/debug.o
+ .debug_loc     0x00000000000003c8      0x3c8 /home/yhy/workspace/cccc/bochs/build/obj/memory.o
+ .debug_loc     0x0000000000000790       0xb0 /home/yhy/workspace/cccc/bochs/build/obj/bitmap.o
+ .debug_loc     0x0000000000000840      0x1b8 /home/yhy/workspace/cccc/bochs/build/obj/string.o
+ .debug_loc     0x00000000000009f8      0x2ec /home/yhy/workspace/cccc/bochs/build/obj/thread.o
+ .debug_loc     0x0000000000000ce4      0x1b8 /home/yhy/workspace/cccc/bochs/build/obj/list.o
+ .debug_loc     0x0000000000000e9c      0x108 /home/yhy/workspace/cccc/bochs/build/obj/sync.o
+ .debug_loc     0x0000000000000fa4      0x108 /home/yhy/workspace/cccc/bochs/build/obj/console.o
+ .debug_loc     0x00000000000010ac       0x84 /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ .debug_loc     0x0000000000001130      0x160 /home/yhy/workspace/cccc/bochs/build/obj/ioqueue.o
+ .debug_loc     0x0000000000001290       0x84 /home/yhy/workspace/cccc/bochs/build/obj/tss.o
+ .debug_loc     0x0000000000001314      0x108 /home/yhy/workspace/cccc/bochs/build/obj/process.o
+ .debug_loc     0x000000000000141c      0x3f4 /home/yhy/workspace/cccc/bochs/build/obj/syscall.o
+ .debug_loc     0x0000000000001810       0x58 /home/yhy/workspace/cccc/bochs/build/obj/syscall-init.o
+ .debug_loc     0x0000000000001868       0xb0 /home/yhy/workspace/cccc/bochs/build/obj/stdio.o
+ .debug_loc     0x0000000000001918       0x2c /home/yhy/workspace/cccc/bochs/build/obj/stdio-kernel.o
+ .debug_loc     0x0000000000001944      0x318 /home/yhy/workspace/cccc/bochs/build/obj/ide.o
+ .debug_loc     0x0000000000001c5c      0x44c /home/yhy/workspace/cccc/bochs/build/obj/fs.o
+ .debug_loc     0x00000000000020a8      0x1b8 /home/yhy/workspace/cccc/bochs/build/obj/file.o
+ .debug_loc     0x0000000000002260      0x134 /home/yhy/workspace/cccc/bochs/build/obj/inode.o
+ .debug_loc     0x0000000000002394      0x1b8 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
+ .debug_loc     0x000000000000254c      0x108 /home/yhy/workspace/cccc/bochs/build/obj/fork.o
+ .debug_loc     0x0000000000002654       0x2c /home/yhy/workspace/cccc/bochs/build/obj/assert.o
+ .debug_loc     0x0000000000002680       0xb0 /home/yhy/workspace/cccc/bochs/build/obj/shell.o
+ .debug_loc     0x0000000000002730      0x1b8 /home/yhy/workspace/cccc/bochs/build/obj/buildin_cmd.o
+ .debug_loc     0x00000000000028e8       0x84 /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -813,8 +1144,10 @@ LOAD /home/yhy/workspace/cccc/bochs/build/obj/exec.o
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges
+.debug_ranges   0x0000000000000000       0x68
  *(.debug_ranges)
+ .debug_ranges  0x0000000000000000       0x30 /home/yhy/workspace/cccc/bochs/build/obj/keyboard.o
+ .debug_ranges  0x0000000000000030       0x38 /home/yhy/workspace/cccc/bochs/build/obj/dir.o
 
 .debug_macro
  *(.debug_macro)

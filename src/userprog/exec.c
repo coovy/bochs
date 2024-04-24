@@ -115,9 +115,10 @@ static int32_t load(const char* pathname) {
 
    /* 遍历所有程序头 */
    uint32_t prog_idx = 0;
+   struct task_struct* cur = running_thread();
+   block_desc_init(cur->u_block_desc);
    while (prog_idx < elf_header.e_phnum) {
       memset(&prog_header, 0, prog_header_size);
-      
       /* 将文件的指针定位到程序头 */
       sys_lseek(fd, prog_header_offset, SEEK_SET);
 

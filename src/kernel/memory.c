@@ -107,7 +107,7 @@ uint32_t *pte_ptr(uint32_t vaddr)
 /* 得到虚拟地址vaddr对应的pde的指针 */
 uint32_t *pde_ptr(uint32_t vaddr)
 {
-   /* 0xfffff是用来访问到页表本身所在的地址 */
+   /* 0xfffff是用来访问到页目录表本身所在的地址， PDE_IDX(vaddr) * 4=>页目录表与页表连续存储 */
    uint32_t *pde = (uint32_t *)((0xfffff000) + PDE_IDX(vaddr) * 4);
    return pde;
 }

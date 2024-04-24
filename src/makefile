@@ -20,7 +20,7 @@ CC = gcc
 LD = ld
 LIB = -I ${LIB_DIR}/kernel -I ${LIB_DIR}/user -I ${LIB_DIR} -I ${SRC_DIR} -I ${SRC_DIR}/kernel -I ${SRC_DIR}/device -I ${SRC_DIR}/thread -I ${SRC_DIR}/userprog -I ${SRC_DIR}/fs -I ${SRC_DIR}/shell
 ASFLAGS = -f elf
-CFLAGS = -Wall $(LIB) -m32 -fno-stack-protector -c -fno-builtin -W -Wstrict-prototypes \
+CFLAGS = -Wall $(LIB) -g -m32 -fno-stack-protector -c -fno-builtin -W -Wstrict-prototypes \
          -Wmissing-prototypes
 LDFLAGS = -m elf_i386 -Ttext $(ENTRY_POINT) -e main -Map $(BUILD_DIR)/kernel.map
 OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o \
