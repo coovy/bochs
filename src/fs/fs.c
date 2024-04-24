@@ -199,8 +199,8 @@ static void partition_format(struct partition* part) {
    sys_free(buf);
 }
 
-/* 将最上层路径名称解析出来 */
-static char* path_parse(char* pathname, char* name_store) {
+/* 将最上层路径名称解析出来放到name_store, 然后返回剩下的路径， 结束返回NULL  */
+char* path_parse(char* pathname, char* name_store) {
    if (pathname[0] == '/') {   // 根目录不需要单独解析
     /* 路径中出现1个或多个连续的字符'/',将这些'/'跳过,如"///a/b" */
        while(*(++pathname) == '/');

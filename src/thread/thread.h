@@ -5,6 +5,7 @@
 #include "list.h"
 #include "memory.h"
 
+#define TASK_NAME_LEN 16
 #define MAX_FILES_OPEN_PER_PROC 8
 extern struct list thread_ready_list;
 extern struct list thread_all_list;
@@ -86,7 +87,7 @@ struct task_struct
     pid_t pid;
     enum task_status status;
     uint8_t priority; // 线程优先级
-    char name[16];
+    char name[TASK_NAME_LEN];
     uint32_t ticks;
 
     uint32_t elapsed_ticks;        // 此任务再cpu运行后至今占用了多少cpu嘀嗒数
@@ -114,4 +115,6 @@ void thread_init(void);
 void thread_block(enum task_status stat);
 void thread_unblock(struct task_struct* pthread);
 void thread_yield(void);
+pid_t fork_pid(void);
+void sys_ps(void);
 #endif

@@ -17,6 +17,8 @@
         "istream": "c",
         "limits": "c",
         "sstream": "c",
-        "streambuf": "c"
+        "streambuf": "c",
+        "stdio.h": "c",
+        "memory.h": "c"
     }
 }
