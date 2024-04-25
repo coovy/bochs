@@ -31,7 +31,7 @@
 00000000000i[      ]   SB16 support: no
 00000000000i[      ]   USB support: no
 00000000000i[      ]   VGA extension support: vbe
-00000000000i[MEM0  ] allocated memory at 0x7fa5f9f46010. after alignment, vector=0x7fa5f9f47000
+00000000000i[MEM0  ] allocated memory at 0x7f1ef251c010. after alignment, vector=0x7f1ef251d000
 00000000000i[MEM0  ] 512.00MB
 00000000000i[MEM0  ] mem block size = 0x00100000, blocks=512
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/home/yhy/workspace/cccc/bochs/share/bochs/BIOS-bochs-latest')
@@ -41,7 +41,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Thu Apr 25 20:14:50 2024 (time0=1714047290)
+00000000000i[CMOS  ] Setting initial clock to: Thu Apr 25 20:35:23 2024 (time0=1714048523)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -175,7 +175,30 @@
 00001529303i[BXVGA ] VBE known Display Interface b0c0
 00001529335i[BXVGA ] VBE known Display Interface b0c5
 00001532260i[VBIOS ] VBE Bios $Id: vbe.c,v 1.65 2014/07/08 18:02:25 vruppert Exp $
-00001876787i[BIOS  ] ata0-0: PCHS=121/16/63 translation=none LCHS=121/16/63
-00001930820i[BIOS  ] ata0-1: PCHS=162/16/63 translation=none LCHS=162/16/63
-00014109269i[BIOS  ] Booting from 0000:7c00
-00069787328i[XGUI  ] charmap update. Font Height is 16
+00001877029i[BIOS  ] ata0-0: PCHS=121/16/63 translation=none LCHS=121/16/63
+00001931062i[BIOS  ] ata0-1: PCHS=162/16/63 translation=none LCHS=162/16/63
+00014109271i[BIOS  ] Booting from 0000:7c00
+00059316968i[XGUI  ] charmap update. Font Height is 16
+07634660000p[XGUI  ] >>PANIC<< POWER button turned off.
+07634660000i[CPU0  ] CPU is in protected mode (active)
+07634660000i[CPU0  ] CS.mode = 32 bit
+07634660000i[CPU0  ] SS.mode = 32 bit
+07634660000i[CPU0  ] EFER   = 0x00000000
+07634660000i[CPU0  ] | EAX=00000077  EBX=00000000  ECX=bffffb90  EDX=00000077
+07634660000i[CPU0  ] | ESP=bfffffa4  EBP=bfffffcc  ESI=00000000  EDI=00000000
+07634660000i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf SF zf af pf cf
+07634660000i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+07634660000i[CPU0  ] |  CS:002b( 0005| 0|  3) 00000000 ffffffff 1 1
+07634660000i[CPU0  ] |  DS:0033( 0006| 0|  3) 00000000 ffffffff 1 1
+07634660000i[CPU0  ] |  SS:0033( 0006| 0|  3) 00000000 ffffffff 1 1
+07634660000i[CPU0  ] |  ES:0033( 0006| 0|  3) 00000000 ffffffff 1 1
+07634660000i[CPU0  ] |  FS:0033( 0006| 0|  3) 00000000 ffffffff 1 1
+07634660000i[CPU0  ] |  GS:0000( 0000| 0|  0) 00000000 00000000 0 0
+07634660000i[CPU0  ] | EIP=c000be49 (c000be49)
+07634660000i[CPU0  ] | CR0=0xe0000011 CR2=0x00000000
+07634660000i[CPU0  ] | CR3=0x00218000 CR4=0x00000000
+07634660000i[CPU0  ] 0xc000be49>> jmp .-2 (0xc000be49) : EBFE
+07634660000i[CMOS  ] Last time is 1714050431 (Thu Apr 25 21:07:11 2024)
+07634660000i[XGUI  ] Exit
+07634660000i[      ] restoring default signal behavior
+07634660000i[SIM   ] quit_sim called with exit code 1
