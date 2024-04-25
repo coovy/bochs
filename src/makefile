@@ -32,14 +32,15 @@ OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o \
 	  $(BUILD_DIR)/process.o $(BUILD_DIR)/syscall.o $(BUILD_DIR)/syscall-init.o \
 	  $(BUILD_DIR)/stdio.o $(BUILD_DIR)/stdio-kernel.o $(BUILD_DIR)/ide.o $(BUILD_DIR)/fs.o \
 	  $(BUILD_DIR)/file.o $(BUILD_DIR)/inode.o $(BUILD_DIR)/dir.o $(BUILD_DIR)/fork.o $(BUILD_DIR)/assert.o \
-	  $(BUILD_DIR)/shell.o $(BUILD_DIR)/buildin_cmd.o $(BUILD_DIR)/exec.o
+	  $(BUILD_DIR)/shell.o $(BUILD_DIR)/buildin_cmd.o $(BUILD_DIR)/exec.o $(BUILD_DIR)/wait_exit.o $(BUILD_DIR)/wait_exit.o
 # OBJS = $(BUILD_DIR)/*.o
 
 HEADERS = ${SRC_DIR}
 
 ##############     c代码编译     ###############
 $(BUILD_DIR)/main.o: ${SRC_DIR}/kernel/main.c ${SRC_DIR}/userprog/process.h ${SRC_DIR}/userprog/tss.h ${SRC_DIR}/lib/kernel/print.h ${SRC_DIR}/fs/fs.h ${SRC_DIR}/userprog/fork.h ${SRC_DIR}/shell/shell.h ${SRC_DIR}/userprog/exec.h \
-        ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/kernel/init.h ${SRC_DIR}/thread/thread.h  ${SRC_DIR}/device/console.h ${SRC_DIR}/device/ioqueue.h ${SRC_DIR}/device/keyboard.h ${LIB_DIR}/user/syscall.h ${SRC_DIR}/userprog/syscall-init.h ${SRC_DIR}/lib/stdio.h
+        ${SRC_DIR}/lib/stdint.h ${SRC_DIR}/kernel/init.h ${SRC_DIR}/thread/thread.h  ${SRC_DIR}/device/console.h ${SRC_DIR}/device/ioqueue.h ${SRC_DIR}/device/keyboard.h ${LIB_DIR}/user/syscall.h ${SRC_DIR}/userprog/syscall-init.h ${SRC_DIR}/lib/stdio.h \
+		${SRC_DIR}/userprog/wait_exit.h
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/init.o: ${SRC_DIR}/kernel/init.c ${SRC_DIR}/kernel/init.h ${SRC_DIR}/lib/kernel/print.h \
@@ -165,6 +166,11 @@ $(BUILD_DIR)/buildin_cmd.o: ${SRC_DIR}/shell/buildin_cmd.c ${SRC_DIR}/shell/buil
 $(BUILD_DIR)/exec.o: ${SRC_DIR}/userprog/exec.c ${SRC_DIR}/userprog/exec.h ${SRC_DIR}/fs/fs.h \
         ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/kernel/global.h \
 		${SRC_DIR}/lib/string.h ${SRC_DIR}/kernel/stdio-kernel.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/wait_exit.o: ${SRC_DIR}/userprog/wait_exit.c ${SRC_DIR}/userprog/wait_exit.h ${SRC_DIR}/fs/fs.h \
+        ${SRC_DIR}/thread/thread.h ${SRC_DIR}/kernel/memory.h ${SRC_DIR}/kernel/global.h \
+		${SRC_DIR}/kernel/stdio-kernel.h ${SRC_DIR}/kernel/debug.h ${SRC_DIR}/lib/kernel/list.h ${SRC_DIR}/lib/kernel/bitmap.h
 	$(CC) $(CFLAGS) $< -o $@
 
 ##############    汇编代码编译    ###############

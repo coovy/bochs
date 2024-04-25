@@ -19,24 +19,29 @@ if [[ ! -d "${LIB_DIR}" || ! -d "${BUILD_OBJ}" ]];then
    exit
 fi
 
-BIN="prog_no_arg"
+BIN="prog_arg"
 CFLAGS="-Wall -m32 -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes -Wsystem-headers"
-LIB="-I ${LIB_DIR}"
-OBJS="${BUILD_DIR}/string.o ${BUILD_DIR}/syscall.o ${BUILD_DIR}/stdio.o ${BUILD_DIR}/assert.o"
+LIBS="-I ${LIB_DIR} -I ${LIB_DIR}/user -I ${SRC_DIR}/fs"
+OBJS="${BUILD_DIR}/string.o ${BUILD_DIR}/syscall.o ${BUILD_DIR}/stdio.o ${BUILD_DIR}/assert.o ./start.o"
 DD_IN=$BIN
-DD_OUT="${IMG_DIR}/hd60M.img" 
+DD_OUT="${IMG_DIR}/hd60M.img"
 
-gcc $CFLAGS -o $BIN".o" $BIN".c" $LIB
-ld -m elf_i386 -e main $BIN".o" $OBJS -o $BIN
+nasm -f elf ./start.S -o ./start.o
+ar rcs simple_crt.a $OBJS start.o
+gcc $CFLAGS -o $BIN".o" $BIN".c" $LIBS
+
+ld -m elf_i386 $BIN".o" simple_crt.a -o $BIN
 SEC_CNT=$(ls -l $BIN|awk '{printf("%d", ($5+511)/512)}')
 if [[ -f $BIN ]];then
    dd if=./$DD_IN of=$DD_OUT bs=512 count=$SEC_CNT seek=300 conv=notrunc
 fi
 
-##########   以上核心就是下面这三条命令   ##########
+##########   以上核心就是下面这五条命令(未修改, 仅作注释)   ##########
+#nasm -f elf ./start.S -o ./start.o
+#ar rcs simple_crt.a ../build/string.o ../build/syscall.o \
+#   ../build/stdio.o ../build/assert.o ./start.o
 #gcc -Wall -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes \
-#   -Wsystem-headers -I ../lib -o prog_no_arg.o prog_no_arg.c
-#ld -e main prog_no_arg.o ../build/string.o ../build/syscall.o\
-#   ../build/stdio.o ../build/assert.o -o prog_no_arg
-#dd if=prog_no_arg of=/home/work/my_workspace/bochs/hd60M.img \
-#   bs=512 count=10 seek=300 conv=notrunc
+#   -Wsystem-headers -I ../lib/ -I ../lib/user -I ../fs prog_arg.c -o prog_arg.o
+#ld prog_arg.o simple_crt.a -o prog_arg
+#dd if=prog_arg of=/home/work/my_workspace/bochs/hd60M.img \
+#   bs=512 count=11 seek=300 conv=notrunc

@@ -19,6 +19,7 @@
         "sstream": "c",
         "streambuf": "c",
         "stdio.h": "c",
-        "memory.h": "c"
+        "memory.h": "c",
+        "file.h": "c"
     }
 }
